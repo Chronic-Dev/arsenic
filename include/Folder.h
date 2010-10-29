@@ -20,9 +20,13 @@
 #ifndef FOLDER_H
 #define FOLDER_H
 
-#include <sys/types.h>
-#include <dirent.h>
+extern "C" {
+	#include <dirent.h>
+	#include <sys/types.h>
+}
+
 #include <map>
+
 #include "File.h"
 #include "AbstractFile.h"
 #include "AbstractFolder.h"
@@ -36,14 +40,14 @@ typedef std::map<const char*, AbstractFolder*>::iterator FolderIterator;
 
 class Folder : public AbstractFolder {
 public:
-	Folder(DIR* dir, const char* path);
+	Folder(DIR* dir, String* path);
 	virtual ~Folder();
 
-	static Folder* open(const char* path);
+	static Folder* open(String* path);
 	virtual void close();
 
-	Folder* openFolder(const char* path);
-	AbstractFile* openFile(const char* filename);
+	Folder* openFolder(String* path);
+	AbstractFile* openFile(String* filename);
 
 	FolderMap* getFolders() {
 		return mFolderMap;
@@ -55,9 +59,9 @@ public:
 
 protected:
 	DIR* mDir;
+	String* mPath;
 	FileMap* mFileMap;
 	FolderMap* mFolderMap;
-	const char* mPath;
 };
 
 }

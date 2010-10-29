@@ -25,7 +25,7 @@
 
 namespace GP {
 
-Folder::Folder(DIR* dir, const char* path) :
+Folder::Folder(DIR* dir, String* path) :
 	mDir(dir), mPath(path) {
 	mFileMap = new FileMap();
 	mFolderMap = new FolderMap();
@@ -60,7 +60,7 @@ Folder::~Folder() {
 		delete mFileMap;
 }
 
-Folder* Folder::open(const char* path) {
+Folder* Folder::open(String* path) {
 	DIR* dir = opendir(path);
 	if (dir == 0) {
 		return 0;
@@ -76,7 +76,7 @@ void Folder::close() {
 	}
 }
 
-Folder* Folder::openFolder(const char *path) {
+Folder* Folder::openFolder(String* path) {
 	FolderIterator it = mFolderMap->find(path);
 	if(it == mFolderMap->end()) {
 		return NULL;
@@ -84,7 +84,7 @@ Folder* Folder::openFolder(const char *path) {
 	return (Folder*) it->second;
 }
 
-AbstractFile* Folder::openFile(const char* filename) {
+AbstractFile* Folder::openFile(String* filename) {
 	FileIterator iter = mFileMap->begin();
 	for(iter = mFileMap->begin(); iter != mFileMap->end(); ++iter) {
 		const char* filename2 = (const char*) iter->first;

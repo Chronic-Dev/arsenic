@@ -17,15 +17,120 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
+extern "C" {
+	#include <getopt.h>
+}
+
+#include <iostream>
 #include "Arsenic.h"
 
 namespace GP {
 
-Arsenic::Arsenic(int argc, char* argv[]) {
-
+Arsenic::Arsenic() {
 }
 
 Arsenic::~Arsenic() {
+}
+
+static struct option longopts[] = {
+	{ "help",    no_argument,       NULL, 'h' },
+	{  NULL,     0,                 NULL,  0  }
+};
+
+/*
+ * print program arguments and options
+ */
+void Arsenic::usage() {
+	std::cout << "Usage: arsenic [OPTIONS] IPSW" << std::endl;
+	std::cout << "Create and restore custom firmwares file to an iPhone/iPod Touch." << std::endl;
+	std::cout << "  -h, --help\t\tprints usage information" << std::endl;
+	std::cout << std::endl;
+}
+
+/*
+ * parse command line arguments and set up variables need in run
+ */
+int Arsenic::initialize(int argc, char* argv[]) {
+	int opt = 0;
+	int optindex = 0;
+
+	while ((opt = getopt_long(argc, argv, "h", longopts, &optindex)) > 0) {
+		switch (opt) {
+		case 'h':
+			usage();
+			return 0;
+
+		default:
+			return -1;
+		}
+	}
+
+	if ((argc-optind) == 1) {
+		argc -= optind;
+		argv += optind;
+
+		mIPSW = new String(argv[0]);
+
+	} else {
+		return -1;
+	}
+
+	return 0;
+}
+
+/*
+ * clean up anything that was done in initialize()
+ */
+void Arsenic::shutdown() {
+	if(mIPSW) {
+		delete mIPSW;
+		mIPSW = NULL;
+	}
+
+	if(mBundles) {
+		delete mBundles;
+		mBundles = NULL;
+	}
+
+	if(mFirmware) {
+		delete mFirmware;
+		mFirmware = NULL;
+	}
+}
+
+/*
+ * create the custom firmware
+ */
+int Arsenic::run() {
+	// make sure we've been initialize correctly
+	if(mIPSW == NULL) {
+		std::cerr << "No IPSW has been set" << std::endl;
+		return -1;
+	}
+
+	std::cout << "Opening IPSW" << std::endl;
+	mFirmware = Firmware::openAbstractFile(ZipFile::open(mIPSW));
+	if(mFirmware == NULL) {
+		std::cerr << "Unable to find IPSW" << std::endl;
+		return -1;
+	}
+
+	std::cout << "Searching for bundle" << std::endl;
+	mBundles = Folder::open("Bundles");
+	if(mBundles == NULL) {
+		std::cerr << "Unable to find bundles" << std::endl;
+		return -1;
+	}
+	// find necessary firmwarebundle
+	// parse firmwarebundle
+	// unzip ipsw
+	// parse buildmanifest
+	// send tss request
+	// patch firmware files
+	// patch ramdisk
+	// patch filesystem
+	// restore firmware to device
+	return 0;
 }
 
 }

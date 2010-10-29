@@ -22,7 +22,14 @@
 using namespace GP;
 
 int main(int argc, char* argv[]) {
-	Arsenic arsenic(argc, argv);
-	return 0;
+	int ret = 0;
+	Arsenic arsenic;
+	if(!arsenic.initialize(argc, argv)) {
+		ret = arsenic.run();
+	} else {
+		arsenic.usage();
+	}
+	arsenic.shutdown();
+	return ret;
 }
 

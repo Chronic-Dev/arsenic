@@ -20,12 +20,27 @@
 #ifndef ARSENIC_H
 #define ARSENIC_H
 
+#include "Common.h"
+#include "String.h"
+#include "Folder.h"
+#include "Firmware.h"
+
 namespace GP {
 
 class Arsenic {
 public:
-	Arsenic(int argc, char* argv[]);
+	Arsenic();
 	virtual ~Arsenic();
+
+	int initialize(int argc, char* argv[]);
+	void shutdown();
+	void usage();
+	int run();
+
+private:
+	String* mIPSW;
+	Folder* mBundles;
+	Firmware* mFirmware;
 };
 
 }

@@ -20,6 +20,7 @@
 #ifndef FIRMWARE_H
 #define FIRMWARE_H
 
+#include "SHA1.h"
 #include "ZipFile.h"
 
 namespace GP {
@@ -31,6 +32,7 @@ public:
 	virtual ~Firmware();
 
 protected:
+	SHA1* mHash;
 	ZipFile* mFile;
 };
 
