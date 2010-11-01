@@ -1,16 +1,16 @@
 CXXFLAGS = -O0 -g -Wall -fmessage-length=0
-OBJS = main.o Array.o Arsenic.o Common.o Data.o Date.o Device.o Dictionary.o File.o Firmware.o Folder.o Image3Element.o Image3File.o MemoryFile.o PList.o Real.o RootNode.o SHA1.o String.o URL.o ZipFile.o
-INCLUDE = -I./include
+
+INCLUDE = -I./include -I"/usr/local/include" -L"/usr/local/lib"
 LIBS = -lcrypto
-TARGET = arsenic
+TARGET = ./bin/arsenic
 
-%.o: %.cpp
-	$(CXX) -c $(<) -o $(@) $(INCLUDE) $(CXXFLAGS)
+DIRS = ./src ./includes
+SOURCE :=	$(foreach DIR,$(DIRS),$(wildcard $(DIR)/*.cpp))
+HEADERS :=	$(foreach DIR,$(DIRS),$(wildcard $(DIR)/*.h))
+EXTRA = ./Makefile
 
-$(TARGET): $(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(INCLUDE) $(LIBS)
-
-all: $(TARGET)
+all:    $(SOURCE)
+	$(CXX) -o $(TARGET) $(SOURCE) $(INCLUDE) $(LIBS) $(CXXFLAGS)
 
 clean:
 	rm -f $(OBJS) $(TARGET)
