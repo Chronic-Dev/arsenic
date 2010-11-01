@@ -19,12 +19,12 @@
 
 #include "Firmware.h"
 #include "ZipFile.h"
+#include "SHA1.h"
 
 namespace GP {
 
-Firmware::Firmware(ZipFile* file) :
+Firmware::Firmware(AbstractFile* file) :
 	mFile(file) {
-
 }
 
 Firmware::~Firmware() {
@@ -34,8 +34,12 @@ Firmware::~Firmware() {
 	}
 }
 
-Firmware* Firmware::openAbstractFile(ZipFile* file) {
+Firmware* Firmware::openAbstractFile(AbstractFile* file) {
 	return new Firmware(file);
+}
+
+SHA1* Firmware::getSha1() {
+	return mHash;
 }
 
 }

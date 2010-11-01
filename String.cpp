@@ -17,16 +17,93 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
+#include <cstring>
+
 #include "String.h"
 
 namespace GP {
 
-String::String(char* data) :
+String::String(const char* data) :
 	Node(kStringNode) {
-	mData = data;
+	mData = strdup(data);
+	mLength = strlen(data);
+}
+
+String::String(const String& data) :
+	Node(kStringNode) {
+	mData = strdup(data.get());
+	mLength = strlen(data.get());
 }
 
 String::~String() {
+	if(mData) {
+		free(mData);
+		mData = NULL;
+	}
+}
+
+const char* String::get() {
+	return mData;
+}
+
+void String::set(const char* data) {
+	if(data) {
+	if(mData) {
+		delete mData;
+		mData = NULL;
+	}
+	mData = strdup(data);
+}
+
+bool String::compare(const String& what) {
+	if(!strcmp(mData, what.get())) {
+		return true;
+	}
+	return false;
+}
+
+bool String::compare(const char* what) {
+	if(!strcmp(mData, what)) {
+		return true;
+	}
+	return false;
+}
+
+int String::length() {
+	mLength = strlen(mData);
+	return mLength;
+}
+
+void concat(const char* what) {
+	unsigned int addSize = strlen(what);
+	unsigned int oldSize = strlen(mData);
+	unsigned int newSize = oldSize + addSize;
+	if(newSize > mLength) {
+		unsigned char* tmp = malloc(newSize+1);
+		if(tmp == NULL) {
+			return NULL;
+		}
+		strncpy(tmp, mData, newSize);
+		strncat(tmp, what, newSize);
+		free(mData);
+		mData = tmp;
+	}
+}
+
+void concat(String& what) {
+	unsigned int addSize = what.length();
+	unsigned int oldSize = strlen(mData);
+	unsigned int newSize = oldSize + addSize;
+	if(newSize > mLength) {
+		unsigned char* tmp = malloc(newSize+1);
+		if(tmp == NULL) {
+			return NULL;
+		}
+		strncpy(tmp, mData, newSize);
+		strncat(tmp, what.get(), newSize);
+		free(mData);
+		mData = tmp;
+	}
 }
 
 }

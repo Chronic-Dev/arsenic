@@ -21,6 +21,7 @@
 #include <cstdio>
 
 #include "File.h"
+#include "String.h"
 
 namespace GP {
 
@@ -29,20 +30,20 @@ File::File() :
 
 }
 
-File* File::open(const char* filename) {
-	FILE* fd = fopen(filename, "r+b");
+File* File::open(String& filename) {
+	FILE* fd = fopen(filename.get(), "r+b");
 	if (!fd) {
 		return NULL;
 	}
 
 	File* file = new File();
 	file->mFile = fd;
-	file->mFilename = filename;
+	file->mFilename = String(filename);
 	return file;
 }
 
-File* File::create(const char* filename) {
-	FILE* fd = fopen(filename, "w+b");
+File* File::create(String& filename) {
+	FILE* fd = fopen(filename.get(), "w+b");
 	if (!fd) {
 		return NULL;
 	}

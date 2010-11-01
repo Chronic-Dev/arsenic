@@ -26,11 +26,23 @@ namespace GP {
 
 class String: public Node {
 public:
-	String(char* data);
+	String(const char* data);
+	String(String& data);
 	virtual ~String();
+
+	const char* get();
+	void set(const char* data);
+
+	int length();
+	bool compare(const char* what);
+	bool compare(const String& what);
+
+	void concat(const char* what);
+	void concat(String& what);
 
 protected:
 	char* mData;
+	unsigned int mLength;
 };
 
 }

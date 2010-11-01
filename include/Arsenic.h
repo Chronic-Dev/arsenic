@@ -20,6 +20,7 @@
 #ifndef ARSENIC_H
 #define ARSENIC_H
 
+#include "PList.h"
 #include "Common.h"
 #include "String.h"
 #include "Folder.h"
@@ -38,7 +39,8 @@ public:
 	int run();
 
 private:
-	String* mIPSW;
+	String mIPSW;
+	Device* mDevice;
 	Folder* mBundles;
 	Firmware* mFirmware;
 };

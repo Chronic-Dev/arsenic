@@ -17,15 +17,20 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-#include <sys/types.h>
-#include <dirent.h>
+extern "C" {
+	#include <dirent.h>
+	#include <sys/types.h>
+}
+
 #include <cstring>
+
+#include "String.h"
 #include "Folder.h"
 #include "File.h"
 
 namespace GP {
 
-Folder::Folder(DIR* dir, String* path) :
+Folder::Folder(DIR* dir, String& path) :
 	mDir(dir), mPath(path) {
 	mFileMap = new FileMap();
 	mFolderMap = new FolderMap();
@@ -35,33 +40,40 @@ Folder::Folder(DIR* dir, String* path) :
 			if (!strcmp(dp->d_name, "..") || !strcmp(dp->d_name, ".")) {
 				continue;
 			}
-			const char* name = strdup(dp->d_name);
-			int new_size = strlen(name) + strlen(path) + 2;
-			char* path_name = new char[new_size];
-			snprintf(path_name, new_size, "%s/%s", path, name);
-			mFolderMap->operator[](name) = Folder::open(path_name);
+			String name(dp->d_name);
+			int new_size = name.length() + path.length() + 2;
+			name.concat("/");
+			name.concat(name);
+			//char* path_name = new char[new_size];
+			//snprintf(path_name, new_size, "%s/%s", path, name);
+			//mFolderMap->operator[](name) = Folder::open(String(path_name));
 		}
 		if (dp->d_type == DT_REG) {
-			const char* name = strdup(dp->d_name);
-			int new_size = strlen(name) + strlen(path) + 2;
-			char* path_name = new char[new_size];
-			snprintf(path_name, new_size, "%s/%s", path, name);
-			mFileMap->operator[](name) = File::open(path_name);
+			//String name(dp->d_name);
+			//int new_size = name.length() + path.length() + 2;
+			//char* path_name = new char[new_size];
+			//snprintf(path_name, new_size, "%s/%s", path, name);
+			//mFileMap->operator[](name) = File::open(String(path_name));
 		}
 	}
 }
 
 Folder::~Folder() {
-	if (mDir)
+	if (mDir) {
 		this->close();
-	if (mFolderMap)
+	}
+	if (mFolderMap) {
 		delete mFolderMap;
-	if(mFileMap)
+		mFolderMap = NULL;
+	}
+	if(mFileMap) {
 		delete mFileMap;
+		mFileMap = NULL;
+	}
 }
 
-Folder* Folder::open(String* path) {
-	DIR* dir = opendir(path);
+Folder* Folder::open(const String& path) {
+	DIR* dir = opendir(path.get());
 	if (dir == 0) {
 		return 0;
 	}
@@ -76,19 +88,18 @@ void Folder::close() {
 	}
 }
 
-Folder* Folder::openFolder(String* path) {
-	FolderIterator it = mFolderMap->find(path);
+Folder* Folder::openFolder(const String& path) {
+	FolderIterator it = mFolderMap->find(path.get());
 	if(it == mFolderMap->end()) {
 		return NULL;
 	}
 	return (Folder*) it->second;
 }
 
-AbstractFile* Folder::openFile(String* filename) {
+File* Folder::openFile(const String& filename) {
 	FileIterator iter = mFileMap->begin();
 	for(iter = mFileMap->begin(); iter != mFileMap->end(); ++iter) {
-		const char* filename2 = (const char*) iter->first;
-		if(!strcmp(filename, filename2)) {
+		if(filename.compare(iter->first)) {
 			return iter->second;
 		}
 	}

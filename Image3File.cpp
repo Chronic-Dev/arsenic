@@ -303,7 +303,7 @@ Image3File* Image3File::setKey(const char* key) {
 	if (!mKey)
 		return NULL;
 
-	for (int i = 0; i < size; i++) {
+	for (int i = 0; i < size; i++) {char*char*
 		sscanf(&key[i * 2], "%02x", (unsigned int*) &mKey[i]);
 	}
 

@@ -27,9 +27,11 @@ namespace GP {
 
 class Firmware {
 public:
-	static Firmware* openAbstractFile(ZipFile* file);
+	static Firmware* openAbstractFile(AbstractFile* file);
 	Firmware(ZipFile* file);
 	virtual ~Firmware();
+
+	SHA1* getSha1();
 
 protected:
 	SHA1* mHash;

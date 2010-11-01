@@ -23,6 +23,7 @@
 #include <string>
 #include <cstdio>
 
+#include "String.h"
 #include "AbstractFile.h"
 
 namespace GP {
@@ -30,8 +31,8 @@ namespace GP {
 class File: public AbstractFile {
 public:
 	virtual ~File();
-	static File* open(const char* filename);
-	static File* create(const char* filename);
+	static File* open(String& filename);
+	static File* create(String& filename);
 
 	virtual void close();
 	virtual unsigned int size();
@@ -44,7 +45,7 @@ private:
 protected:
 	int mSize;
 	FILE* mFile;
-	const char* mFilename;
+	String mFilename;
 };
 
 }

@@ -1,5 +1,5 @@
 /**
-  * GreenPois0n Arsenic - RootNode.h
+  * GreenPois0n Arsenic - Device.h
   * Copyright (C) 2010 Chronic-Dev Team
   * Copyright (C) 2010 Joshua Hill
   *
@@ -17,27 +17,20 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-#ifndef ROOTNODE_H
-#define ROOTNODE_H
-
-#include <map>
-#include "Node.h"
-#include "String.h"
+#ifndef DEVICE_H
+#define DEVICE_H
 
 namespace GP {
 
-class RootNode: public Node {
+class Device {
 public:
-	RootNode(const NodeType type);
-	virtual ~RootNode();
+	Device();
+	virtual ~Device();
 
-	Node* getNode(const String& key);
-
-protected:
-	NodeMap* mNodes;
-	unsigned int depth;
+	static Device* open();
+	void close();
 };
 
 }
 
-#endif /* ROOTNODE_H */
+#endif /* DEVICE_H */

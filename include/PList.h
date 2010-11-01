@@ -30,8 +30,8 @@ class PList {
 public:
 	virtual ~PList();
 
-	static PList* open(AbstractFile* file);
-	Node* findNode(const char* key);
+	static PList* open(const AbstractFile* file);
+	Node* findNode(const String& key);
 
 private:
 	PList();

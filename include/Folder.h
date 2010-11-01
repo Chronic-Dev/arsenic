@@ -28,26 +28,27 @@ extern "C" {
 #include <map>
 
 #include "File.h"
+#include "String.h"
 #include "AbstractFile.h"
 #include "AbstractFolder.h"
 
 namespace GP {
 
-typedef std::map<const char*, AbstractFile*> FileMap;
-typedef std::map<const char*, AbstractFolder*> FolderMap;
-typedef std::map<const char*, AbstractFile*>::iterator FileIterator;
-typedef std::map<const char*, AbstractFolder*>::iterator FolderIterator;
+typedef std::map<String,AbstractFile*> FileMap;
+typedef std::map<String,AbstractFolder*> FolderMap;
+typedef std::map<String,AbstractFile*>::iterator FileIterator;
+typedef std::map<String,AbstractFolder*>::iterator FolderIterator;
 
 class Folder : public AbstractFolder {
 public:
-	Folder(DIR* dir, String* path);
+	Folder(DIR* dir, String& path);
 	virtual ~Folder();
 
-	static Folder* open(String* path);
+	static Folder* open(const String& path);
 	virtual void close();
 
-	Folder* openFolder(String* path);
-	AbstractFile* openFile(String* filename);
+	Folder* openFolder(const String& path);
+	File* openFile(const String& filename);
 
 	FolderMap* getFolders() {
 		return mFolderMap;
@@ -59,7 +60,7 @@ public:
 
 protected:
 	DIR* mDir;
-	String* mPath;
+	String mPath;
 	FileMap* mFileMap;
 	FolderMap* mFolderMap;
 };

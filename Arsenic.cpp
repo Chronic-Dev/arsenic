@@ -22,11 +22,15 @@ extern "C" {
 }
 
 #include <iostream>
+
+#include "PList.h"
+#include "Device.h"
 #include "Arsenic.h"
+#include "Firmware.h"
 
 namespace GP {
 
-Arsenic::Arsenic() {
+Arsenic::Arsenic() : mIPSW("") {
 }
 
 Arsenic::~Arsenic() {
@@ -69,7 +73,7 @@ int Arsenic::initialize(int argc, char* argv[]) {
 		argc -= optind;
 		argv += optind;
 
-		mIPSW = new String(argv[0]);
+		mIPSW.set(argv[0]);
 
 	} else {
 		return -1;
@@ -82,11 +86,6 @@ int Arsenic::initialize(int argc, char* argv[]) {
  * clean up anything that was done in initialize()
  */
 void Arsenic::shutdown() {
-	if(mIPSW) {
-		delete mIPSW;
-		mIPSW = NULL;
-	}
-
 	if(mBundles) {
 		delete mBundles;
 		mBundles = NULL;
@@ -103,24 +102,41 @@ void Arsenic::shutdown() {
  */
 int Arsenic::run() {
 	// make sure we've been initialize correctly
-	if(mIPSW == NULL) {
+	if(mIPSW.compare("")) {
 		std::cerr << "No IPSW has been set" << std::endl;
 		return -1;
 	}
 
 	std::cout << "Opening IPSW" << std::endl;
-	mFirmware = Firmware::openAbstractFile(ZipFile::open(mIPSW));
+	mFirmware = Firmware::openAbstractFile(ZipFile::openFile(mIPSW));
 	if(mFirmware == NULL) {
 		std::cerr << "Unable to find IPSW" << std::endl;
 		return -1;
 	}
 
+	std::cout << "Detecting device" << std::endl;
+	mDevice = Device::open();
+	if(mDevice == NULL) {
+		std::cerr << "Unable to open device" << std::endl;
+		return -1;
+	}
+
 	std::cout << "Searching for bundle" << std::endl;
-	mBundles = Folder::open("Bundles");
+	mBundles = Folder::open(String("Bundles"));
 	if(mBundles == NULL) {
 		std::cerr << "Unable to find bundles" << std::endl;
 		return -1;
 	}
+
+	FolderIterator it;
+	FolderMap* mBundleMap = mBundles->getFolders();
+	for(it = mBundleMap->begin(); it != mBundleMap->end(); ++it) {
+		Folder* folder = (Folder*) it->second;
+		File* infoFile = folder->openFile(String("Info.plist"));
+		PList* infoPlist = PList::open(infoFile);
+		String* bundleSha1 = (String*) infoPlist->findNode(String("SHA1"));
+	}
+
 	// find necessary firmwarebundle
 	// parse firmwarebundle
 	// unzip ipsw

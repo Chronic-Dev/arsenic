@@ -20,6 +20,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
+
 #include "Node.h"
 #include "PList.h"
 #include "RootNode.h"
@@ -33,7 +34,7 @@ PList::PList() :
 PList::~PList() {
 }
 
-PList* PList::open(AbstractFile* file) {
+PList* PList::open(const AbstractFile* file) {
 	Dictionary* root = new Dictionary();
 	int size = file->size();
 	char* data = (char*) file->read(size);
@@ -57,6 +58,11 @@ PList* PList::open(AbstractFile* file) {
 	PList* plist = new PList();
 	return plist;
 
+}
+
+
+Node* Node::findNode(const String& key) {
+	return NULL;
 }
 
 }

@@ -29,7 +29,7 @@ class String;
 class AbstractFolder {
 public:
 	virtual ~AbstractFolder() { }
-	virtual AbstractFile* openFile(String* filename) = 0;
+	virtual AbstractFile* openFile(String& filename) = 0;
 };
 
 }

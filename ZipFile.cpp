@@ -21,8 +21,148 @@
 
 namespace GP {
 
-ZipFile::~ZipFile() {
-	// TODO Auto-generated destructor stub
+ZipFile::ZipFile(struct zip* zip, String& filename) :
+	mFile(zip), mFilename(filename) {
+}
+
+virtual ZipFile::~ZipFile() {
+}
+
+AbstractFile* ZipFile::openFile(const String& filename) {
+	int err = 0;
+	struct zip* zip = zip_open(filename, 0, &err);
+	if (zip == NULL) {
+		return NULL;
+	}
+
+	return new ZipFile(zip, filename);
+}
+
+int ZipFile::extract_to_file(String& ipsw, String& infile, String& outfile) {
+	int zindex = zip_name_locate(mFile, infile, 0);
+	if (zindex < 0) {
+		return -1;
+	}
+
+	struct zip_stat zstat;
+	zip_stat_init(&zstat);
+	if (zip_stat_index(mFile, zindex, 0, &zstat) != 0) {
+		return -1;
+	}
+
+	char* buffer = (char*) malloc(BUFSIZE);
+	if (buffer == NULL) {
+		return -1;
+	}
+
+	struct zip_file* zfile = zip_fopen_index(mFile, zindex, 0);
+	if (zfile == NULL) {
+		return -1;
+	}
+
+	FILE* fd = fopen(outfile, "wb");
+	if (fd == NULL) {
+		zip_fclose(zfile);
+		return -1;
+	}
+
+	int i = 0;
+	int size = 0;
+	int bytes = 0;
+	int count = 0;
+	double progress = 0;
+	for (i = zstat.size; i > 0; i -= count) {
+		if (i < BUFSIZE)
+			size = i;
+		else
+			size = BUFSIZE;
+		count = zip_fread(zfile, buffer, size);
+		if (count < 0) {
+			zip_fclose(zfile);
+			free(buffer);
+			return -1;
+		}
+		fwrite(buffer, 1, count, fd);
+
+		bytes += size;
+		progress = ((double) bytes / (double) zstat.size) * 100.0;
+		//print_progress_bar(progress);
+	}
+
+	fclose(fd);
+	zip_fclose(zfile);
+	//close(archive);
+	free(buffer);
+	return 0;
+}
+
+int ZipFile::extract_to_memory(String& ipsw, String& infile, char** pbuffer, int* psize) {
+	int zindex = zip_name_locate(mFile, infile, 0);
+	if (zindex < 0) {
+		return -1;
+	}
+
+	struct zip_stat zstat;
+	zip_stat_init(&zstat);
+	if (zip_stat_index(mFile, zindex, 0, &zstat) != 0) {
+		return -1;
+	}
+
+	struct zip_file* zfile = zip_fopen_index(mFile, zindex, 0);
+	if (zfile == NULL) {
+		return -1;
+	}
+
+	int size = zstat.size;
+	char* buffer = (char*) malloc(size);
+	if (buffer == NULL) {
+		zip_fclose(zfile);
+		return -1;
+	}
+
+	if (zip_fread(zfile, buffer, size) != size) {
+		zip_fclose(zfile);
+		free(buffer);
+		return -1;
+	}
+
+	zip_fclose(zfile);
+	//close(archive);
+
+	*pbuffer = buffer;
+	*psize = size;
+	return 0;
+}
+
+int ZipFile::extract_build_manifest(String& ipsw, plist_t* buildmanifest) {
+	int size = 0;
+	char* data = NULL;
+
+	/* older devices don't require personalized firmwares and use a BuildManifesto.plist */
+	if (extract_to_memory(ipsw, "BuildManifesto.plist", &data, &size)
+			== 0) {
+		plist_from_xml(data, size, buildmanifest);
+		return 0;
+	}
+
+	data = NULL;
+	size = 0;
+
+	/* whereas newer devices do not require personalized firmwares and use a BuildManifest.plist */
+	if (extract_to_memory(ipsw, "BuildManifest.plist", &data, &size)
+			== 0) {
+		plist_from_xml(data, size, buildmanifest);
+		return 0;
+	}
+
+	return -1;
+}
+
+void ZipFile::close() {
+	if (mFile != NULL) {
+		zip_unchange_all(mFile);
+		zip_close(mFile);
+	}
 }
 
 }
