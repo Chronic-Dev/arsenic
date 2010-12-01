@@ -1,16 +1,19 @@
-CXXFLAGS = -O0 -g -Wall -fmessage-length=0
+CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -I./include
 
-INCLUDE = -I./include -I"/usr/local/include" -L"/usr/local/lib"
-LIBS = -lcrypto
-TARGET = ./bin/arsenic
+DIRS = src include
 
-DIRS = ./src ./includes
-SOURCE :=	$(foreach DIR,$(DIRS),$(wildcard $(DIR)/*.cpp))
-HEADERS :=	$(foreach DIR,$(DIRS),$(wildcard $(DIR)/*.h))
-EXTRA = ./Makefile
+SRC = $(foreach DIR,$(DIRS),$(wildcard $(DIR)/*.cpp))
 
-all:    $(SOURCE)
-	$(CXX) -o $(TARGET) $(SOURCE) $(INCLUDE) $(LIBS) $(CXXFLAGS)
+OBJS =		$(patsubst %.cpp,%.o,$(SRC))
+
+LIBS =
+
+TARGET =	bin/arsenic
+
+$(TARGET):	$(OBJS)
+	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
+
+all:	$(TARGET)
 
 clean:
 	rm -f $(OBJS) $(TARGET)
