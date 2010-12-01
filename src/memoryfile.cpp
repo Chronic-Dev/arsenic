@@ -23,17 +23,17 @@ using namespace std;
 	
 namespace GP {
 	
-	MemoryFile* openFile(const char* filename) {
+	MemoryFile* MemoryFile::openFile(const char* filename) {
 		
-		return *0;
+		return NULL;
 	}
 	
-	unsigned char* &getData() {
+	unsigned char &MemoryFile::getData() {
 		
 		return *_data;
 	}
 	
-	int writeFile(const char* filename, char* data) {
+	int MemoryFile::writeFile(const char* filename, char* data) {
 		
 		return 0;
 	}

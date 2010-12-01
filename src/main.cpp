@@ -18,8 +18,7 @@
  **/
 
 #include "arsenic.h"
-#include <iostream>
-#include <ctype.h>
+#include "common.h"
 
 using namespace std;
 using namespace GP;

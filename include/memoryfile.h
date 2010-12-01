@@ -20,6 +20,8 @@
 #ifndef MEMORYFILE_H_
 #define MEMORYFILE_H_
 
+#include "common.h"
+
 namespace GP {
 	
 	class MemoryFile {
@@ -27,7 +29,7 @@ namespace GP {
 	
 		// Manipulate
 		static MemoryFile* openFile(const char* filename);
-		unsigned char* &getData();
+		unsigned char &getData();
 		int writeFile(const char* filename, char* data);
 	
 	private:
