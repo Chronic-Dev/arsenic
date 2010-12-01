@@ -25,7 +25,8 @@ namespace GP {
 	
 	MemoryFile::MemoryFile(const char* filename, unsigned char* data) {
 	
-		
+		_fileName = filename;
+		_data = data;
 	}
 	
 	MemoryFile* MemoryFile::openFile(const char* filename) {
