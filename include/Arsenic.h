@@ -34,22 +34,22 @@ extern "C" {
 
 namespace GP {
 
-class Arsenic {
+	class Arsenic {
 
-private:
-	static Arsenic* _instance;
-	static bool _instanceFlag;
+	private:
+		static Arsenic* _instance;
+		static bool _instanceFlag;
 
-//	Arsenic();
-//	~Arsenic();
-//	Arsenic& operator= (const Arsenic&);
+	//	Arsenic();
+	//	~Arsenic();
+	//	Arsenic& operator= (const Arsenic&);
 
-public:
-	static Arsenic &getInstance();
-	int initialize(int argc, char* argv[]);
-	void usage();
+	public:
+		static Arsenic &getInstance();
+		int initialize(int argc, char* argv[]);
+		void usage();
 
-};
+	};
 
 }
 

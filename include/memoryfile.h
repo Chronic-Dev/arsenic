@@ -16,3 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
+
+#ifndef MEMORYFILE_H_
+#define MEMORYFILE_H_
+
+namespace GP {
+	
+	class MemoryFile {
+	public:
+	
+		// Manipulate
+		static MemoryFile* openFile(const char* filename);
+		unsigned char* &getData();
+		int writeFile(const char* filename, char* data);
+	
+	private:
+		unsigned char* _data;
+		unsigned char* _fileName;
+	};
+}
+
+#endif /* MEMORYFILE_H_ */

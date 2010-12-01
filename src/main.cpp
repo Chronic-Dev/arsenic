@@ -37,8 +37,8 @@ int main(int argc, char* argv[]) {
 	cout << "the Free Software Foundation, either version 3 of the License, or" << endl;
 	cout << "(at your option) any later version." << endl;
 	cout << endl;
-
-	 Arsenic arsenic = Arsenic::getInstance();
+	
+	Arsenic arsenic = Arsenic::getInstance();
 
 	int ret;
 

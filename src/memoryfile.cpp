@@ -17,8 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-#ifndef ABSTRACTFILE_H_
-#define ABSTRACTFILE_H_
+#include "MemoryFile.h"
 
-
-#endif /* ABSTRACTFILE_H_ */
+using namespace std;
+	
+namespace GP {
+	
+	MemoryFile* openFile(const char* filename) {
+		
+		return *0;
+	}
+	
+	unsigned char* &getData() {
+		
+		return *_data;
+	}
+	
+	int writeFile(const char* filename, char* data) {
+		
+		return 0;
+	}
+}
