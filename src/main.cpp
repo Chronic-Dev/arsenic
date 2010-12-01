@@ -23,6 +23,12 @@
 using namespace std;
 using namespace GP;
 
+int shutdown(const char* message, int code) {
+	
+	cout << message << endl;
+	exit(code);
+}
+
 int main(int argc, char* argv[]) {
 
 	cout << endl;
@@ -40,12 +46,11 @@ int main(int argc, char* argv[]) {
 	Arsenic arsenic = Arsenic::getInstance();
 
 	int ret;
+	
+	if ((ret = arsenic.initialize(argc, argv)) != ARSENIC_INIT_OK && ret != ARSENIC_INIT_SHUTDOWN) {
 
-	 if ((ret = arsenic.initialize(argc, argv)) != ARSENIC_INIT_OK && ret != ARSENIC_INIT_SHUTDOWN) {
+			shutdown("Failed to initialize arsenic", -1);
+	}
 
-		 cout << "Failed to initialize arsenic." << endl;
-		 return -1;
-	 }
-
-	 return 0;
+	return 0;
 }

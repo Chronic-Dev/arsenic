@@ -23,9 +23,37 @@ using namespace std;
 	
 namespace GP {
 	
+	MemoryFile::MemoryFile(const char* filename, unsigned char* data) {
+	
+		
+	}
+	
 	MemoryFile* MemoryFile::openFile(const char* filename) {
 		
-		return NULL;
+		FILE* file = fopen(filename, 'r');
+		
+		if (file == NULL) {
+			
+			cout << "Failed to open file (" << filename << ")." << endl;
+			return NULL;
+		}
+		
+		fseek(file, 0, SEEK_END);
+		unsigned int len = ftell(file);
+		fseek(file, 0, SEEK_SET);
+		
+		char* data = malloc(len);
+		
+		if (data == NULL) {
+			
+			cout << "Failed to allocate memory." << endl;
+			return NULL;
+		}
+		
+		fread(data, 1, len, file);
+		fclose(file);
+		
+		return (new MemoryFile(filename, (const char*)data));
 	}
 	
 	unsigned char &MemoryFile::getData() {
@@ -33,8 +61,19 @@ namespace GP {
 		return *_data;
 	}
 	
-	int MemoryFile::writeFile(const char* filename, char* data) {
+	bool MemoryFile::writeFile(const char* filename) {
 		
-		return 0;
+		FILE* file = fopen(filename, 'w');
+		
+		if (file == NULL) {
+			
+			cout << "Failed to open file (" << filename << ")." << endl;
+			return false;
+		}
+		
+		fwrite(_data, 1, sizeof(_data), file);
+		fclose(file);
+		
+		return true;
 	}
 }

@@ -30,11 +30,14 @@ namespace GP {
 		// Manipulate
 		static MemoryFile* openFile(const char* filename);
 		unsigned char &getData();
-		int writeFile(const char* filename, char* data);
+		bool writeFile(const char* filename);
 	
 	private:
 		unsigned char* _data;
 		unsigned char* _fileName;
+		
+		MemoryFile();
+		~MemoryFile();
 	};
 }
 
