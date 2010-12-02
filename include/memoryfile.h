@@ -34,9 +34,9 @@ namespace GP {
 	
 	private:
 		unsigned char* _data;
-		unsigned char* _fileName;
+		const char* _fileName;
 		
-		MemoryFile();
+		MemoryFile(const char* filename, unsigned char* data);
 		~MemoryFile();
 	};
 }

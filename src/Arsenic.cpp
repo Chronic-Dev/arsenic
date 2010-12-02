@@ -22,6 +22,7 @@
 using namespace std;
 
 namespace GP {
+	
 	Arsenic* Arsenic::_instance;
 	bool Arsenic::_instanceFlag = false;
 	
@@ -43,7 +44,7 @@ namespace GP {
 	int Arsenic::initialize(int argc, char* argv[]) {
 
 		int opt, optIndex;
-
+		
 		if (! (argc >= 2)) {
 			usage();
 			return ARSENIC_INIT_BAD_ARGS;

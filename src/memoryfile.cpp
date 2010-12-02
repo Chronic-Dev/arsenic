@@ -31,7 +31,7 @@ namespace GP {
 	
 	MemoryFile* MemoryFile::openFile(const char* filename) {
 		
-		FILE* file = fopen(filename, 'r');
+		FILE* file = fopen(filename, "r");
 		
 		if (file == NULL) {
 			
@@ -43,7 +43,7 @@ namespace GP {
 		unsigned int len = ftell(file);
 		fseek(file, 0, SEEK_SET);
 		
-		char* data = malloc(len);
+		char* data = (char*)malloc(len);
 		
 		if (data == NULL) {
 			
@@ -54,7 +54,7 @@ namespace GP {
 		fread(data, 1, len, file);
 		fclose(file);
 		
-		return (new MemoryFile(filename, (const char*)data));
+		return (new MemoryFile(filename, (unsigned char*)data));
 	}
 	
 	unsigned char &MemoryFile::getData() {
@@ -64,7 +64,7 @@ namespace GP {
 	
 	bool MemoryFile::writeFile(const char* filename) {
 		
-		FILE* file = fopen(filename, 'w');
+		FILE* file = fopen(filename, "w");
 		
 		if (file == NULL) {
 			
