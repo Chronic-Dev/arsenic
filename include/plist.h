@@ -17,28 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-#ifndef MEMORYFILE_H_
-#define MEMORYFILE_H_
+#ifndef PLIST_H_
+#define PLIST_H_
 
 #include "common.h"
 
 namespace GP {
 	
-	class MemoryFile {
+	class PList {
 	public:
-	
-		// Manipulate
-		static MemoryFile* openFile(const char* filename);
-		unsigned char &getData();
-		bool writeFile(const char* filename);
-	
-	private:
-		unsigned char* _data;
-		const char* _fileName;
-		
-		MemoryFile(const char* filename, unsigned char* data);
-		~MemoryFile();
+		PList();
+		~PList();
 	};
 }
 
-#endif /* MEMORYFILE_H_ */
+#endif /* PLIST_H_ */

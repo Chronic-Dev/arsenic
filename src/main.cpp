@@ -1,7 +1,7 @@
 /**
  * GreenPois0n Arsenic
  * Copyright (C) 2010 Chronic-Dev Team
- * Copyright (C) 2010 Joshua Hill
+ * Copyright (C) 2010 GreySyntax
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,7 +34,6 @@ int main(int argc, char* argv[]) {
 	cout << endl;
 	cout << "GreenPois0n Arsenic" << endl;
 	cout << "Copyright (C) 2010 Chronic-Dev Team" << endl;
-	cout << "Copyright (C) 2010 Joshua Hill" << endl;
 	cout << endl;
 
 	cout << "This program is free software: you can redistribute it and/or modify" << endl;

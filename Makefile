@@ -6,7 +6,7 @@ SRC = $(foreach DIR,$(DIRS),$(wildcard $(DIR)/*.cpp))
 
 OBJS =		$(patsubst %.cpp,%.o,$(SRC))
 
-LIBS =
+LIBS = -lxml2 -lcrypto
 
 TARGET =	bin/arsenic
 
