@@ -1,6 +1,6 @@
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -I./include
 
-DIRS = src include
+DIRS = Source include
 
 SRC = $(foreach DIR,$(DIRS),$(wildcard $(DIR)/*.cpp))
 
@@ -14,14 +14,14 @@ TARGET = arsenic
 #$(TARGET):	$(OBJS)
 #	@echo 'Linking $(TARGET)'
 #	@$(CXX) -o $(OBJDIR)$(TARGET) $(OBJS) $(LIBS)
-	
+
 %.o: %.cpp
 	@echo 'Compiling $@'
 	@$(CXX) -c $(CXXFLAGS) $< -o $@
-		
+
 all:
 	@echo 'Arsenic, requires you run make with a platform argument (win, linux, mach) or clean'
-	
+
 header:
 	@echo ''
 	@echo 'GreenPois0n Arsenic'
@@ -33,17 +33,17 @@ header:
 	@echo '(at your option) any later version.'
 	@echo ''
 	@mkdir -p $(OBJDIR)
-	
+
 mach: header $(OBJS)
 	@echo 'Linking $(TARGET)'
 	@$(CXX) -o $(OBJDIR)$(TARGET) $(OBJS) $(LIBS)
 
 linux: header
 	@echo 'TODO'
-	
+
 win: header
 	@echo 'TODO'
-	
+
 clean:
 	@rm -rf bin/
 	@mkdir bin
