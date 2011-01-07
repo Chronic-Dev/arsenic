@@ -17,28 +17,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
 
-#ifndef MEMORYFILE_H_
-#define MEMORYFILE_H_
+#ifndef ARSENIC_H_
+#define ARSENIC_H_
+
+#define ARSENIC_INIT_OK 1
+#define ARSENIC_INIT_BAD_ARGS 2
+#define ARSENIC_INIT_ERROR 3
+#define ARSENIC_INIT_SHUTDOWN 4
+
+extern "C" {
+#include <getopt.h>
+}
 
 #include "common.h"
 
 namespace GP {
-	
-	class MemoryFile {
-	public:
-	
-		// Manipulate
-		static MemoryFile* openFile(const char* filename);
-		unsigned char &getData();
-		bool writeFile(const char* filename);
-	
+    
+	class Arsenic {
+        
 	private:
-		unsigned char* _data;
-		const char* _fileName;
-		
-		MemoryFile(const char* filename, unsigned char* data);
-		~MemoryFile();
+		static Arsenic* _instance;
+		static bool _instanceFlag;
+        
+        //	Arsenic();
+        //	~Arsenic();
+        //	Arsenic& operator= (const Arsenic&);
+        
+	public:
+		static Arsenic &getInstance();
+		int initialize(int argc, char* argv[]);
+		void usage();
+        
 	};
+    
 }
 
-#endif /* MEMORYFILE_H_ */
+#endif /* ARSENIC_H_ */

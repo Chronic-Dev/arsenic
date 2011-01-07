@@ -20,11 +20,11 @@
 #include "MemoryFile.h"
 
 using namespace std;
-	
+
 namespace GP {
 	
 	MemoryFile::MemoryFile(const char* filename, unsigned char* data) {
-	
+        
 		_fileName = filename;
 		_data = data;
 	}
