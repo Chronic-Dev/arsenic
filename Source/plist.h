@@ -20,6 +20,7 @@
 #ifndef PLIST_H_
 #define PLIST_H_
 
+#include "common.h"
 #include <plist/plist.h>
 
 namespace GP {
@@ -32,8 +33,7 @@ namespace GP {
         
     private:
         const char* filename;
-        plist_t root_node;
-        
+        plist_t root_node; 
     };
 }
 #endif /* PLIST_H_ */
