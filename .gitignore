@@ -3,6 +3,7 @@ bin/*
 include/.DS_Store
 src/.DS_Store
 src/*.o
+Source/*.o
 build/**
 ArsenicX.xcodeproj/*.pbxuser
 ArsenicX.xcodeproj/*.mode1v3
