@@ -31,6 +31,12 @@ namespace GP {
 		{  NULL,     0,                 NULL,  0  }
 	};
 	
+    
+    Arsenic::~Arsenic() {
+        
+        delete Arsenic::_instance;
+    }
+    
 	Arsenic &Arsenic::getInstance() {
 		if(! _instanceFlag) {
             

@@ -58,13 +58,15 @@ namespace GP {
             plist_from_bin(buffer, len, &root_node);
             plist_to_xml(root_node, &out, &size);
             
-            delete(buffer);
+            free(buffer);
             
             buffer = out;
             len = size;
         }
         
         plist_from_xml(buffer, len, &root_node);
+        
+        
     }
     
     PList::~PList() {

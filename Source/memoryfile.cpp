@@ -28,6 +28,21 @@ namespace GP {
 		_fileName = filename;
 		_data = data;
 	}
+    
+    MemoryFile::~MemoryFile() {
+        
+        if (_fileName != NULL) {
+            
+            delete _fileName;
+        }
+        
+        if (_data != NULL) {
+            
+            free(_data);
+        }
+        
+        
+    }
 	
 	MemoryFile* MemoryFile::openFile(const char* filename) {
 		

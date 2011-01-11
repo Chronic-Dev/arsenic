@@ -45,6 +45,7 @@ namespace GP {
         
 	public:
 		static Arsenic &getInstance();
+        ~Arsenic();
 		int initialize(int argc, char* argv[]);
 		void usage();
         
