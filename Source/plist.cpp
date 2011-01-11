@@ -25,6 +25,8 @@ namespace GP {
     
     PList::PList(const char* filename) {
         
+        _filename = filename;
+        
         FILE* file = NULL;
         char* buffer = NULL;
         
@@ -55,8 +57,8 @@ namespace GP {
             uint32_t size = 0;
             
             cout << "[*] Converting binary plist to xml" << endl;
-            plist_from_bin(buffer, len, &root_node);
-            plist_to_xml(root_node, &out, &size);
+            plist_from_bin(buffer, len, &_node);
+            plist_to_xml(_node, &out, &size);
             
             free(buffer);
             
@@ -64,16 +66,27 @@ namespace GP {
             len = size;
         }
         
-        plist_from_xml(buffer, len, &root_node);
+        plist_from_xml(buffer, len, &_node);
         
+        //Get the root node's type
+        _type = plist_get_node_type(_node);
         
+        if (_type == PLIST_DICT) {
+            
+            cout << "[!!] Root plist, has size: " << plist_dict_get_size(_node) << endl;
+        }
     }
     
     PList::~PList() {
         
         //destory
-        plist_free(root_node);
+        plist_free(_node);
         delete(filename);
+    }
+    
+    plist_type PList::getType(const char* node_name) {
+        
+        return plist_get_node_type();
     }
 
 }

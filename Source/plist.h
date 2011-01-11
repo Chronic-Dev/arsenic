@@ -23,6 +23,9 @@
 #include "common.h"
 #include <plist/plist.h>
 
+#define ROOT_DICT 0
+#define ROOT_ARRAY 1
+
 namespace GP {
     
     class PList {
@@ -32,8 +35,9 @@ namespace GP {
         ~PList();
         
     private:
-        const char* filename;
-        plist_t root_node; 
+        const char* _filename;
+        plist_t _node;
+        plist_type _type;
     };
 }
 #endif /* PLIST_H_ */

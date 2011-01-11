@@ -38,10 +38,7 @@ namespace GP {
 	private:
 		static Arsenic* _instance;
 		static bool _instanceFlag;
-        
         //	Arsenic();
-        //	~Arsenic();
-        //	Arsenic& operator= (const Arsenic&);
         
 	public:
 		static Arsenic &getInstance();
