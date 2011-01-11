@@ -23,9 +23,6 @@
 #include "common.h"
 #include <plist/plist.h>
 
-#define ROOT_DICT 0
-#define ROOT_ARRAY 1
-
 namespace GP {
     
     class PList {
