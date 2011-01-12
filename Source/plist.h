@@ -21,17 +21,24 @@
 #define PLIST_H_
 
 #include "common.h"
+
+extern "C" {
 #include <plist/plist.h>
+#include <partial/partial.h>  
+}
 
 namespace GP {
     
     class PList {
         
     public:
+        static PList fromPartial(const char* container, const char* filename);
         PList(const char* filename);
+        PList(const char* filename, char* data);
         ~PList();
         
     private:
+        void setRootNode(char* buffer, int length);
         const char* _filename;
         plist_t _node;
         plist_type _type;

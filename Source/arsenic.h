@@ -30,6 +30,7 @@ extern "C" {
 }
 
 #include "common.h"
+#include "plist.h"
 
 namespace GP {
     
@@ -38,6 +39,8 @@ namespace GP {
 	private:
 		static Arsenic* _instance;
 		static bool _instanceFlag;
+        const char* _ipswName;
+        PList* _ipsw;
         //	Arsenic();
         
 	public:

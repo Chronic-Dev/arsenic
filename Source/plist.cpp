@@ -23,6 +23,11 @@ using namespace std;
 
 namespace GP {
     
+    void callback(ZipInfo* info, CDFile* file, size_t progress) {
+        int percentDone = progress * 100/file->compressedSize;
+        printf("Getting: %d%%\n", percentDone);
+    }
+    
     PList::PList(const char* filename) {
         
         _filename = filename;
@@ -49,7 +54,77 @@ namespace GP {
         fread(buffer, 1, len, file);
         fclose(file);
         
+        setRootNode(buffer, len);
+    }
+    
+    PList::PList(const char* filename, char* data) {
+        
+        _filename = filename;
+        setRootNode(data, strlen(data));
+    }
+    
+    PList::~PList() {
+        
+        //destory
+        plist_free(_node);
+        delete(_filename);
+    }
+    
+    plist_type PList::getType(const char* node_name) {
+        
+        //return plist_get_node_type();
+        return NULL; //TODO
+    }
+    
+    PList PList::fromPartial(const char* container, const char* filename) {
+        
+        int len = strlen(container);
+        
+        char fname[len+7]; //account for file:// if it's missing
+        
+        //Somebody forgot file:// or http://
+        if (strstr(container, "http://") == NULL || strstr(container, "file://") == NULL) {
+            
+            strcpy(fname, "file://");
+        }
+        
+        strcpy(fname, container);
+        
+        ZipInfo* info = PartialZipInit(fname);
+        
+        if (info == NULL) {
+            
+            cout << "[X] Failed to open url: " << fname << " (aborting)" << endl;
+            return NULL;
+        }
+        
+        PartialZipSetProgressCallback(info, callback);
+        CDFile* file = PartialZipFindFile(info, filename);
+        
+        if (!file) {
+            
+            cout << "[X] Failed to find file (" << filename << ") in stream (aborting)" << endl;
+            return NULL;
+        }
+        
+        unsigned char* buffer = PartialZipGetFile(info, file);
+        
+        int bufferLen = file->size;
+        
+        buffer = (unsigned char*)realloc(buffer, bufferLen+1);
+        buffer[bufferLen] = '\0';
+        
+        return PList(filename, (char*)buffer);
+    }
+    
+    void PList::setRootNode(char* buffer, int length) {
         //Is this a binary plist?
+        
+        if (buffer == NULL) {
+            
+            cout << "[X] Buffer was empty (aborting)" << endl;
+            return;
+        }
         
         if (memcmp(buffer, "bplist00", 8) == 0) {
             
@@ -57,16 +132,16 @@ namespace GP {
             uint32_t size = 0;
             
             cout << "[*] Converting binary plist to xml" << endl;
-            plist_from_bin(buffer, len, &_node);
+            plist_from_bin(buffer, length, &_node);
             plist_to_xml(_node, &out, &size);
             
             free(buffer);
             
             buffer = out;
-            len = size;
+            length = size;
         }
         
-        plist_from_xml(buffer, len, &_node);
+        plist_from_xml(buffer, length, &_node);
         
         //Get the root node's type
         _type = plist_get_node_type(_node);
@@ -75,18 +150,6 @@ namespace GP {
             
             cout << "[!!] Root plist, has size: " << plist_dict_get_size(_node) << endl;
         }
-    }
-    
-    PList::~PList() {
-        
-        //destory
-        plist_free(_node);
-        delete(filename);
-    }
-    
-    plist_type PList::getType(const char* node_name) {
-        
-        return plist_get_node_type();
     }
 
 }

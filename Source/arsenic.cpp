@@ -28,6 +28,7 @@ namespace GP {
 	
 	static struct option longOpts[] = {
 		{ "help",    no_argument,       NULL, 'h' },
+        { "ipsw",    1,                 NULL, 'i' },
 		{  NULL,     0,                 NULL,  0  }
 	};
 	
@@ -65,6 +66,11 @@ namespace GP {
 					usage();
 					shutdown = true;
 					break;
+                
+                case 'i':
+                    _ipswName = (const char*)optarg;
+                    _ipsw = PList::fromPartial(_ipswName, "Restore.plist");
+                    break;
                     
 				default:
 					cout << "fail" << endl;
