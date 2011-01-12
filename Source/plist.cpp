@@ -70,11 +70,15 @@ namespace GP {
         delete(_filename);
     }
     
+    /*
     plist_type PList::getType(const char* node_name) {
         
         //return plist_get_node_type();
         return NULL; //TODO
+     
+        //TODO Will select node via key (if _node is a dict) then return type
     }
+    */
     
     PList PList::fromPartial(const char* container, const char* filename) {
         
