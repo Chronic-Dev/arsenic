@@ -31,8 +31,6 @@ void callback(ZipInfo* info, CDFile* file, size_t progress) {
 
 namespace GP {
     
-
-    
     PList::PList(const char* filename) {
         
         _filename = filename;
@@ -160,6 +158,5 @@ namespace GP {
             cout << "[!!] Root plist, has size: " << plist_dict_get_size(_node) << endl;
         }
     }
-
 }
 
