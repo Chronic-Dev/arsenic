@@ -21,12 +21,17 @@
 
 using namespace std;
 
+/* for partial-zip */
+char endianness = IS_LITTLE_ENDIAN;
+
+void callback(ZipInfo* info, CDFile* file, size_t progress) {
+    int percentDone = progress * 100/file->compressedSize;
+    printf("Getting: %d%%\n", percentDone);
+}
+
 namespace GP {
     
-    void callback(ZipInfo* info, CDFile* file, size_t progress) {
-        int percentDone = progress * 100/file->compressedSize;
-        printf("Getting: %d%%\n", percentDone);
-    }
+
     
     PList::PList(const char* filename) {
         
@@ -80,7 +85,7 @@ namespace GP {
     }
     */
     
-    PList PList::fromPartial(const char* container, const char* filename) {
+    PList* PList::fromPartial(const char* container, const char* filename) {
         
         int len = strlen(container);
         
@@ -118,7 +123,7 @@ namespace GP {
         buffer = (unsigned char*)realloc(buffer, bufferLen+1);
         buffer[bufferLen] = '\0';
         
-        return PList(filename, (char*)buffer);
+        return new PList(filename, (char*)buffer);
     }
     
     void PList::setRootNode(char* buffer, int length) {

@@ -36,7 +36,7 @@ namespace GP {
         PList(const char* filename, char* data);
         ~PList();
         
-        static PList fromPartial(const char* container, const char* filename);
+        static PList* fromPartial(const char* container, const char* filename);
         
         //Methods
         //TODO: plist_type getType(const char* node_name);
