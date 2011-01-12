@@ -63,17 +63,25 @@ namespace GP {
             
 			switch (opt) {
 				case 'h':
-					usage();
+					
 					shutdown = true;
 					break;
                 
                 case 'i':
                     _ipswName = (const char*)optarg;
                     _ipsw = PList::fromPartial(_ipswName, "Restore.plist");
+                    
+                    if (_ipsw == NULL) {
+                        
+                        cout << "[X] failed to open ipsw (aborting)" << endl;
+                        shutdown = true;
+                        break;
+                    }
+                    
                     break;
                     
 				default:
-					cout << "fail" << endl;
+					usage();
 					shutdown = true;
 					break;
 			}
