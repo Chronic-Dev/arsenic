@@ -35,10 +35,6 @@ namespace GP {
     
     Arsenic::~Arsenic() {
         
-        if (_ipswName != NULL)
-            delete _ipswName;
-        if (_ipsw != NULL)
-            delete _ipsw;
         if (_productBuild != NULL)
             free(_productBuild);
         if (_productType != NULL)
