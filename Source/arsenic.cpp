@@ -71,20 +71,19 @@ namespace GP {
                     _ipswName = (const char*)optarg;
                     _ipsw = PList::fromPartial(_ipswName, "Restore.plist");
                     
-                    //if (_ipsw == NULL) {
-                    //    
-                    //    cout << "[X] Failed to open ipsw (aborting)" << endl;
-                    //    shutdown = true;
-                    //    break;
-                    //}
+                    if (_ipsw == NULL) {
+                        
+                        cout << "[X] Failed to open ipsw (aborting)" << endl;
+                        shutdown = true;
+                        break;
+                    }
                     
                     cout << "PList: " << &_ipsw << endl;
                     
                     if (_ipsw->getType("ProductType") == PLIST_STRING) {
                         
-                        
+                       //TODO check ProductType is supported 
                     }
-                    //cout << "ProductType: " << PList::fromPartial(_ipswName, "Restore.plist").getType("ProductType") << endl;
                     
                     break;
                     
