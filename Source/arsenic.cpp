@@ -102,27 +102,6 @@ namespace GP {
 		return ARSENIC_INIT_OK;
 	}
     
-    bool Arsenic::hasBundle() {
-        
-        char bundle[200];
-        bool exists = false;
-        
-        DIR *dir = NULL;
-        
-        strcpy(bundle, "./bundles/");
-        strcat(bundle, _productType);
-        strcat(bundle, "/");
-        strcat(bundle, _productBuild);
-        
-        if ((dir = opendir(bundle)) != NULL) {
-            
-            exists = true;
-            (void)closedir(dir);
-        }
-        
-        return exists;
-    }
-    
 	void Arsenic::usage() {
         
 		cout << "Usage: arsenic [OPTIONS] IPSW" << endl;

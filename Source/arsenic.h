@@ -52,7 +52,6 @@ namespace GP {
         ~Arsenic();
 		int initialize(int argc, char* argv[]);
 		void usage();
-        bool hasBundle();
 	};
 }
 

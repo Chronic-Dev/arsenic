@@ -25,10 +25,9 @@ namespace GP {
         
     public:
         Bundle(const char* productType, const char* productBuild);
-        Bundle();
         ~Bundle();
         
-        static bool hasBundle(const char* productType, const char* productBuild);
+        static bool exists(const char* productType, const char* productBuild);
         
     private:
         const char* _type;

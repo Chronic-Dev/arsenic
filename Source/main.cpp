@@ -51,12 +51,5 @@ int main(int argc, char* argv[]) {
         shutdown("Failed to initialize arsenic", -1);
 	}
     
-    if (! arsenic.hasBundle()) {
-        
-        shutdown("Bundle not found", -1);
-    }
-    
-    cout << "We haz bundle!" << endl;
-    
 	return 0;
 }

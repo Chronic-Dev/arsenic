@@ -23,5 +23,32 @@ using namespace std;
 
 namespace GP {
     
+    Bundle::Bundle(const char* productType, const char* productBuild) {
+        
+    }
     
+    Bundle::~Bundle() {
+        
+    }
+    
+    bool Bundle::exists(const char* productType, const char* productBuild) {
+        
+        char bundle[200];
+        bool exists = false;
+        
+        DIR *dir = NULL;
+        
+        strcpy(bundle, "./bundles/");
+        strcat(bundle, productType);
+        strcat(bundle, "/");
+        strcat(bundle, productBuild);
+        
+        if ((dir = opendir(bundle)) != NULL) {
+            
+            exists = true;
+            (void)closedir(dir);
+        }
+        
+        return exists;
+    }
 }
