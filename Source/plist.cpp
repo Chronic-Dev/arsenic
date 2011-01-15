@@ -73,7 +73,7 @@ namespace GP {
         delete(_filename);
     }
     
-    plist_type PList::getType(const char* node_name) {
+    long int PList::getType(const char* node_name) {
         
         if (_type == PLIST_DICT) {
             

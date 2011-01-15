@@ -39,7 +39,7 @@ namespace GP {
         static PList* fromPartial(const char* container, const char* filename);
         
         //Methods
-        //TODO: plist_type getType(const char* node_name);
+        long int getType(const char* node_name);
         
     private:
         void setRootNode(char* buffer, int length);

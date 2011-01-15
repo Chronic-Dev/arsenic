@@ -63,7 +63,7 @@ namespace GP {
             
 			switch (opt) {
 				case 'h':
-					
+					usage();
 					shutdown = true;
 					break;
                 
@@ -98,6 +98,7 @@ namespace GP {
 		cout << "Usage: arsenic [OPTIONS] IPSW" << endl;
 		cout << "Create and restore custom firmwares file to an iPhone/iPod Touch." << endl;
 		cout << "  -h, --help\t\tprints usage information" << endl;
+        cout << "  -i, --ipsw [filename]\t\tthe ipsw to work from" << endl;
 		cout << endl;
 	}
 }
