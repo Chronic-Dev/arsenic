@@ -35,7 +35,7 @@ namespace GP {
     
     Arsenic::~Arsenic() {
         
-        delete Arsenic::_instance;
+        //Causes segfault: delete Arsenic::_instance;
     }
     
 	Arsenic &Arsenic::getInstance() {
@@ -73,7 +73,7 @@ namespace GP {
                     
                     if (_ipsw == NULL) {
                         
-                        cout << "[X] failed to open ipsw (aborting)" << endl;
+                        cout << "[X] Failed to open ipsw (aborting)" << endl;
                         shutdown = true;
                         break;
                     }

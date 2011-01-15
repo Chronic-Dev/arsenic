@@ -25,8 +25,9 @@ using namespace std;
 char endianness = IS_LITTLE_ENDIAN;
 
 void callback(ZipInfo* info, CDFile* file, size_t progress) {
+    
     int percentDone = progress * 100/file->compressedSize;
-    printf("Getting: %d%%\n", percentDone);
+    cout << "[!!] Getting " << percentDone << endl;
 }
 
 namespace GP {
@@ -89,17 +90,18 @@ namespace GP {
     
     PList* PList::fromPartial(const char* container, const char* filename) {
         
-        int len = strlen(container);
+        cout << "[*] Extracting PList using partial-zip" << endl;
         
+        int len = strlen(container);
         char fname[len+7]; //account for file:// if it's missing
         
         //Somebody forgot file:// or http://
-        if (strstr(container, "http://") == NULL || strstr(container, "file://") == NULL) {
+        if (strstr(container, "http://") == NULL && strstr(container, "file://") == NULL) {
             
             strcpy(fname, "file://");
         }
         
-        strcpy(fname, container);
+        strcat(fname, container);
         
         ZipInfo* info = PartialZipInit(fname);
         
