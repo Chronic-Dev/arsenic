@@ -28,6 +28,8 @@
 /* Begin PBXFileReference section */
 		146AD9F112D77C0500AB7B90 /* plist.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plist.cpp; sourceTree = "<group>"; };
 		146AD9F212D77C0500AB7B90 /* plist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = plist.h; sourceTree = "<group>"; };
+		1483FDC912E250A000D9F851 /* bundle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bundle.cpp; sourceTree = "<group>"; };
+		1483FDCA12E250A000D9F851 /* bundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bundle.h; sourceTree = "<group>"; };
 		1492FFF112D76FEA00E385DC /* arsenic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = arsenic.cpp; sourceTree = "<group>"; };
 		1492FFF212D76FEA00E385DC /* arsenic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arsenic.h; sourceTree = "<group>"; };
 		1492FFF512D7702600E385DC /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
@@ -71,6 +73,8 @@
 				1492FFF712D7704800E385DC /* memoryfile.h */,
 				146AD9F112D77C0500AB7B90 /* plist.cpp */,
 				146AD9F212D77C0500AB7B90 /* plist.h */,
+				1483FDC912E250A000D9F851 /* bundle.cpp */,
+				1483FDCA12E250A000D9F851 /* bundle.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
