@@ -42,6 +42,7 @@ namespace GP {
     }
     
 	Arsenic &Arsenic::getInstance() {
+        
 		if(! _instanceFlag) {
             
 			_instanceFlag = true;
