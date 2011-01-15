@@ -27,6 +27,7 @@
 
 extern "C" {
 #include <getopt.h>
+#include <plist/plist.h>
 }
 
 #include "common.h"
@@ -41,16 +42,14 @@ namespace GP {
 		static bool _instanceFlag;
         const char* _ipswName;
         PList* _ipsw;
-        //	Arsenic();
+        // Arsenic();
         
 	public:
 		static Arsenic &getInstance();
         ~Arsenic();
 		int initialize(int argc, char* argv[]);
 		void usage();
-        
 	};
-    
 }
 
 #endif /* ARSENIC_H_ */

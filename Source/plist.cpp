@@ -27,7 +27,7 @@ char endianness = IS_LITTLE_ENDIAN;
 void callback(ZipInfo* info, CDFile* file, size_t progress) {
     
     int percentDone = progress * 100/file->compressedSize;
-    cout << "[!!] Getting " << percentDone << endl;
+    cout << "[!!] Getting: " << percentDone << endl;
 }
 
 namespace GP {
@@ -91,8 +91,8 @@ namespace GP {
     PList* PList::fromPartial(const char* container, const char* filename) {
         
         cout << "[*] Extracting PList using partial-zip" << endl;
-        
         int len = strlen(container);
+        
         char fname[len+7]; //account for file:// if it's missing
         
         //Somebody forgot file:// or http://
@@ -127,7 +127,7 @@ namespace GP {
         buffer = (unsigned char*)realloc(buffer, bufferLen+1);
         buffer[bufferLen] = '\0';
         
-        return new PList(filename, (char*)buffer);
+        return (PList*)(new PList(filename, (char*)buffer));
     }
     
     void PList::setRootNode(char* buffer, int length) {
