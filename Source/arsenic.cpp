@@ -35,7 +35,14 @@ namespace GP {
     
     Arsenic::~Arsenic() {
         
-        //Causes segfault: delete Arsenic::_instance;
+        if (_ipswName != NULL)
+            delete _ipswName;
+        if (_ipsw != NULL)
+            delete _ipsw;
+        if (_productBuild != NULL)
+            free(_productBuild);
+        if (_productType != NULL)
+            free(_productType);
     }
     
 	Arsenic &Arsenic::getInstance() {
@@ -57,7 +64,7 @@ namespace GP {
 			return ARSENIC_INIT_BAD_ARGS;
 		}
         
-		bool shutdown;
+		bool shutdown = false;
         
 		while ((opt = getopt_long(argc, argv, "h", longOpts, &optIndex)) > 0) {
             
@@ -77,14 +84,6 @@ namespace GP {
                         shutdown = true;
                         break;
                     }
-                    
-                    cout << "PList: " << &_ipsw << endl;
-                    
-                    if (_ipsw->getType("ProductType") == PLIST_STRING) {
-                        
-                       //TODO check ProductType is supported 
-                    }
-                    
                     break;
                     
 				default:
@@ -97,8 +96,35 @@ namespace GP {
 		if (shutdown)
 			return ARSENIC_INIT_SHUTDOWN;
         
+        if (_ipsw != NULL) {
+            
+            _ipsw->getStringValue("ProductType", &_productType);
+            _ipsw->getStringValue("ProductBuildVersion", &_productBuild);
+        }
+        
 		return ARSENIC_INIT_OK;
 	}
+    
+    bool Arsenic::hasBundle() {
+        
+        char bundle[200];
+        bool exists = false;
+        
+        DIR *dir = NULL;
+        
+        strcpy(bundle, "./bundles/");
+        strcat(bundle, _productType);
+        strcat(bundle, "/");
+        strcat(bundle, _productBuild);
+        
+        if ((dir = opendir(bundle)) != NULL) {
+            
+            exists = true;
+            (void)closedir(dir);
+        }
+        
+        return exists;
+    }
     
 	void Arsenic::usage() {
         

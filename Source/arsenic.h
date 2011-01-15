@@ -28,6 +28,7 @@
 extern "C" {
 #include <getopt.h>
 #include <plist/plist.h>
+#include <dirent.h>
 }
 
 #include "common.h"
@@ -42,6 +43,8 @@ namespace GP {
 		static bool _instanceFlag;
         const char* _ipswName;
         PList* _ipsw;
+        char* _productType;
+        char* _productBuild;
         // Arsenic();
         
 	public:
@@ -49,6 +52,7 @@ namespace GP {
         ~Arsenic();
 		int initialize(int argc, char* argv[]);
 		void usage();
+        bool hasBundle();
 	};
 }
 

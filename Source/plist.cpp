@@ -70,8 +70,10 @@ namespace GP {
     PList::~PList() {
         
         //destory
-        plist_free(_node);
-        delete(_filename);
+        if (_node != NULL)
+            plist_free(_node);
+        if (_filename != NULL)
+            delete(_filename);
     }
     
     long int PList::getType(const char* node_name) {
@@ -85,7 +87,33 @@ namespace GP {
                 return plist_get_node_type(node);
             }
         }
+        
         return NULL;
+    }
+    
+    long int PList::getType(plist_t node) {
+        
+        if (node != NULL) {
+            return plist_get_node_type(node);
+        }
+        
+        return NULL;
+    }
+    
+    void PList::getStringValue(const char* key, char **value) {
+        
+        if (_type == PLIST_DICT) {
+            
+            plist_t node = NULL;
+            
+            if ((node = plist_dict_get_item(_node, key)) != NULL) {
+                
+                if (getType(node) == PLIST_STRING) {
+                    
+                    plist_get_string_val(node, value);
+                }
+            }
+        }
     }
     
     PList* PList::fromPartial(const char* container, const char* filename) {
@@ -121,7 +149,6 @@ namespace GP {
         }
         
         unsigned char* buffer = PartialZipGetFile(info, file);
-        
         int bufferLen = file->size;
         
         buffer = (unsigned char*)realloc(buffer, bufferLen+1);
