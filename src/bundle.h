@@ -19,6 +19,10 @@
 
 #include "common.h"
 
+extern "C" {
+	#include <dirent.h>
+}
+
 namespace GP {
     
     class Bundle {

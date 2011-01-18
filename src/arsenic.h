@@ -28,7 +28,6 @@
 extern "C" {
 #include <getopt.h>
 #include <plist/plist.h>
-#include <dirent.h>
 }
 
 #include "common.h"
