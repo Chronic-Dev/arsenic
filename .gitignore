@@ -5,8 +5,11 @@ autoscan.log
 config.h
 aclocal.m4
 config.status
+config.log
 Makefile
 Makefile.in
 bin/*
 src/.DS_Store
 src/*.o
+src/Makefile
+src/.deps
