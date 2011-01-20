@@ -119,6 +119,7 @@ namespace GP {
         int len = strlen(container);
         
         char fname[len+7]; //account for file:// if it's missing
+        bzero(fname, len+7); // zeroize memory
         
         //Somebody forgot file:// or http://
         if (strstr(container, "http://") == NULL && strstr(container, "file://") == NULL) {

@@ -28,7 +28,7 @@ namespace GP {
 	
 	static struct option longOpts[] = {
 		{ "help",    no_argument,       NULL, 'h' },
-        { "ipsw",    1,                 NULL, 'i' },
+		{ "ipsw",    1,                 NULL, 'i' },
 		{  NULL,     0,                 NULL,  0  }
 	};
 	
@@ -63,7 +63,7 @@ namespace GP {
         
 		bool shutdown = false;
         
-		while ((opt = getopt_long(argc, argv, "h", longOpts, &optIndex)) > 0) {
+		while ((opt = getopt_long(argc, argv, "hi:", longOpts, &optIndex)) > 0) {
             
 			switch (opt) {
 				case 'h':
@@ -72,7 +72,7 @@ namespace GP {
 					break;
                 
                 case 'i':
-                    _ipswName = (const char*)optarg;
+                    _ipswName = optarg;
                     _ipsw = PList::fromPartial(_ipswName, "Restore.plist");
                     
                     if (_ipsw == NULL) {
