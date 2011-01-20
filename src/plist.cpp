@@ -29,6 +29,7 @@ void callback(ZipInfo* info, CDFile* file, size_t progress) {
 namespace GP {
 	
 	PList::PList(const char* filename) {
+		initialize();
 		_filename = filename;
 		
 		FILE* file = NULL;
@@ -42,12 +43,11 @@ namespace GP {
 		fseek(file, 0, SEEK_SET);
 		
 		buffer = (char*)malloc(len);
-				bzero(buffer, len);
-		
 		if (buffer == NULL) {
 			cout << "[X] Failed to allocate memory" << endl;
 			return;
 		}
+		bzero(buffer, len);
 		
 		fread(buffer, 1, len, file);
 		fclose(file);
@@ -56,10 +56,18 @@ namespace GP {
 	}
 	
 	PList::PList(const char* filename, char* data) {
+		initialize();
 		_filename = filename;
 		setRootNode(data, strlen(data));
 	}
-	
+
+	void PList::initialize() {
+		printf("Initializing: %p %p %p\n", _filename, _node, _type);
+		_filename = NULL;
+		_node = NULL;
+		_type = PLIST_NONE;
+	}
+
 	PList::~PList() {
 		//destory
 		if (_node != NULL)
@@ -160,6 +168,9 @@ namespace GP {
 			length = size;
 		}
 		
+		if(_node != NULL)
+			plist_free(_node);
+
 		plist_from_xml(buffer, length, &_node);
 		
 		//Get the root node's type
