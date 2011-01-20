@@ -62,7 +62,6 @@ namespace GP {
 	}
 
 	void PList::initialize() {
-		printf("Initializing: %p %p %p\n", _filename, _node, _type);
 		_filename = NULL;
 		_node = NULL;
 		_type = PLIST_NONE;
