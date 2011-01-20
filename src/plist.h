@@ -23,31 +23,31 @@
 #include "common.h"
 
 extern "C" {
-#include <plist/plist.h>
-#include <partial/partial.h>  
+	#include <plist/plist.h>
+	#include <partial/partial.h>  
 }
 
 namespace GP {
-    
-    class PList {
-        
-    public:
-        PList(const char* filename);
-        PList(const char* filename, char* data);
-        ~PList();
-        
-        static PList* fromPartial(const char* container, const char* filename);
-        
-        //Methods
-        long int getType(const char* node_name);
-        long int getType(plist_t node);
-        void getStringValue(const char* key, char** value);
-        
-    private:
-        void setRootNode(char* buffer, int length);
-        const char* _filename;
-        plist_t _node;
-        plist_type _type;
-    };
+	
+	class PList {
+		
+	public:
+		PList(const char* filename);
+		PList(const char* filename, char* data);
+		~PList();
+		
+		static PList* fromPartial(const char* container, const char* filename);
+		
+		//Methods
+		long int getType(const char* node_name);
+		long int getType(plist_t node);
+		void getStringValue(const char* key, char** value);
+		
+	private:
+		void setRootNode(char* buffer, int length);
+		const char* _filename;
+		plist_t _node;
+		plist_type _type;
+	};
 }
 #endif /* PLIST_H_ */

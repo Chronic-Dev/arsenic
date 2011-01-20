@@ -26,29 +26,29 @@
 #define ARSENIC_INIT_SHUTDOWN 4
 
 extern "C" {
-#include <getopt.h>
-#include <plist/plist.h>
+	#include <getopt.h>
+	#include <plist/plist.h>
 }
 
 #include "common.h"
 #include "plist.h"
 
 namespace GP {
-    
+
 	class Arsenic {
-        
+		
 	private:
 		static Arsenic* _instance;
 		static bool _instanceFlag;
-        const char* _ipswName;
-        PList* _ipsw;
-        char* _productType;
-        char* _productBuild;
-        // Arsenic();
-        
+		const char* _ipswName;
+		PList* _ipsw;
+		char* _productType;
+		char* _productBuild;
+		// Arsenic();
+		
 	public:
 		static Arsenic &getInstance();
-        ~Arsenic();
+		~Arsenic();
 		int initialize(int argc, char* argv[]);
 		void usage();
 	};

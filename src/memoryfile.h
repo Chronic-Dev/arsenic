@@ -26,12 +26,12 @@ namespace GP {
 	
 	class MemoryFile {
 	public:
-        
+		
 		// Manipulate
 		static MemoryFile* openFile(const char* filename);
 		unsigned char &getData();
 		bool writeFile(const char* filename);
-        
+		
 	private:
 		unsigned char* _data;
 		const char* _fileName;

@@ -24,28 +24,22 @@ using namespace std;
 namespace GP {
 	
 	MemoryFile::MemoryFile(const char* filename, unsigned char* data) {
-        
 		_fileName = filename;
 		_data = data;
 	}
-    
-    MemoryFile::~MemoryFile() {
-        
-        if (_fileName != NULL) {
-            
-            delete _fileName;
-        }
-        
-        if (_data != NULL) {
-            
-            free(_data);
-        }
-        
-        
-    }
+	
+	MemoryFile::~MemoryFile() {
+		if (_fileName != NULL) {
+			delete _fileName;
+		}
+		
+		if (_data != NULL) {
+			free(_data);
+		}
+		
+	}
 	
 	MemoryFile* MemoryFile::openFile(const char* filename) {
-		
 		FILE* file = fopen(filename, "r");
 		
 		if (file == NULL) {
@@ -74,12 +68,10 @@ namespace GP {
 	}
 	
 	unsigned char &MemoryFile::getData() {
-		
 		return *_data;
 	}
 	
 	bool MemoryFile::writeFile(const char* filename) {
-		
 		FILE* file = fopen(filename, "w");
 		
 		if (file == NULL) {

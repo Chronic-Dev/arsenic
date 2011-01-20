@@ -30,12 +30,12 @@ int shutdown(const char* message, int code) {
 }
 
 int main(int argc, char* argv[]) {
-    
+	
 	cout << endl;
 	cout << "GreenPois0n Arsenic" << endl;
 	cout << "Copyright (C) 2010 Chronic-Dev Team" << endl;
 	cout << endl;
-    
+	
 	cout << "This program is free software: you can redistribute it and/or modify" << endl;
 	cout << "it under the terms of the GNU General Public License as published by" << endl;
 	cout << "the Free Software Foundation, either version 3 of the License, or" << endl;
@@ -43,13 +43,13 @@ int main(int argc, char* argv[]) {
 	cout << endl;
 	
 	Arsenic arsenic = Arsenic::getInstance();
-    
+	
 	int ret;
 	
 	if ((ret = arsenic.initialize(argc, argv)) != ARSENIC_INIT_OK && ret != ARSENIC_INIT_SHUTDOWN) {
-        
-        shutdown("Failed to initialize arsenic", -1);
+		
+		shutdown("Failed to initialize arsenic", -1);
 	}
-    
+	
 	return 0;
 }
