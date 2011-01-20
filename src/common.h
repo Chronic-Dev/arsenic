@@ -19,6 +19,6 @@
 
 #include <iostream>
 #include <ctype.h>
-
-#define IS_BIG_ENDIAN 0
-#define IS_LITTLE_ENDIAN 1
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>

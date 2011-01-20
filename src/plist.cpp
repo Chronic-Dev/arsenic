@@ -21,9 +21,6 @@
 
 using namespace std;
 
-/* for partial-zip */
-char endianness = IS_LITTLE_ENDIAN;
-
 void callback(ZipInfo* info, CDFile* file, size_t progress) {
     
     int percentDone = progress * 100/file->compressedSize;
