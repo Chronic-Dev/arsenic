@@ -34,6 +34,7 @@ namespace GP {
     bool Bundle::exists(const char* productType, const char* productBuild) {
         
         char bundle[200];
+				bzero(bundle, sizeof(bundle));
         bool exists = false;
         
         DIR *dir = NULL;

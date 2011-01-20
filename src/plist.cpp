@@ -44,6 +44,7 @@ namespace GP {
         fseek(file, 0, SEEK_SET);
         
         buffer = (char*)malloc(len);
+				bzero(buffer, len);
         
         
         if (buffer == NULL) {

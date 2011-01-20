@@ -59,6 +59,7 @@ namespace GP {
 		fseek(file, 0, SEEK_SET);
 		
 		char* data = (char*)malloc(len);
+		bzero(data, len);
 		
 		if (data == NULL) {
 			

@@ -15,7 +15,7 @@ AC_PROG_CXX
 # Checks for libraries.
 AC_CHECK_LIB([crypto], [CRYPTO_free], [], [AC_MSG_ERROR(libcrypto not found!)])
 AC_CHECK_LIB([curl], [curl_version], [], [AC_MSG_ERROR(libcurl not found)])
-AC_CHECK_LIB([partial], [PartialZipGetFile], [], [AC_MSG_ERROR(libpartial not found)])
+AC_CHECK_LIB([partial], [PartialZipGetFile], [], [AC_MSG_ERROR(libpartial not found)], -lz)
 AC_CHECK_LIB([plist], [plist_from_bin], [], [AC_MSG_ERROR(libplist not found)])
 AC_CHECK_LIB([xml2], [xmlParseFile], [], [AC_MSG_ERROR(libxml2 not found)])
 AC_CHECK_LIB([z], [gzread], [], [AC_MSG_ERROR(zlib not found)])
