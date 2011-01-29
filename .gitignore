@@ -1,3 +1,5 @@
+depcomp
+install-sh
 stamp-h1
 .DS_Store
 configure
