@@ -16,3 +16,5 @@ src/*.o
 src/Makefile
 src/.deps
 src/arsenic
+src/Makefile.in
+src/Makefile.am
