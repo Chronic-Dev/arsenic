@@ -1,3 +1,4 @@
+stamp-h1
 .DS_Store
 configure
 autom4te.cache
@@ -8,6 +9,7 @@ config.h.in
 aclocal.m4
 config.status
 config.log
+missing
 Makefile
 Makefile.in
 bin/*
@@ -17,4 +19,3 @@ src/Makefile
 src/.deps
 src/arsenic
 src/Makefile.in
-src/Makefile.am
