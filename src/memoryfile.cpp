@@ -72,8 +72,8 @@ namespace GP {
 		return (new MemoryFile(filename, (unsigned char*)data));
 	}
 	
-	unsigned char &MemoryFile::getData() {
-		return *_data;
+	unsigned char* MemoryFile::getData() {
+		return &*_data;
 	}
 	
 	bool MemoryFile::writeFile(const char* filename) {

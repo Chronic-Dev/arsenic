@@ -102,7 +102,7 @@ namespace GP {
 	
 	PList* PList::fromPartial(const char* container, const char* filename) {
 		
-		return (PList*)(new PList(filename, (char*)MemoryFile::fromPartial(container, filename)));
+		return (PList*)(new PList(filename, (char*)MemoryFile::fromPartial(container, filename)->getData()));
 	}
 	
 	void PList::setRootNode(char* buffer, int length) {

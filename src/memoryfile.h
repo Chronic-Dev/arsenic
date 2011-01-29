@@ -34,7 +34,7 @@ namespace GP {
 		// Manipulate
 		static MemoryFile* openFile(const char* filename);
 		static MemoryFile* fromPartial(const char* container, const char* filename);
-		unsigned char &getData();
+		unsigned char* getData();
 		bool writeFile(const char* filename);
 		
 	private:
