@@ -3,6 +3,8 @@ configure
 autom4te.cache
 autoscan.log
 config.h
+config.h.in~
+config.h.in
 aclocal.m4
 config.status
 config.log
@@ -13,3 +15,4 @@ src/.DS_Store
 src/*.o
 src/Makefile
 src/.deps
+src/arsenic

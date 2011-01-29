@@ -34,15 +34,16 @@ namespace GP {
 	bool Bundle::exists(const char* productType, const char* productBuild) {
 		
 		char bundle[200];
-				bzero(bundle, sizeof(bundle));
-		bool exists = false;
+		bzero(bundle, sizeof(bundle)); //Fixes issues with some linux builds
 		
+		bool exists = false;
 		DIR *dir = NULL;
 		
 		strcpy(bundle, "./bundles/");
 		strcat(bundle, productType);
 		strcat(bundle, "/");
 		strcat(bundle, productBuild);
+		strcat(bundle, ".bundle");
 		
 		if ((dir = opendir(bundle)) != NULL) {
 			
