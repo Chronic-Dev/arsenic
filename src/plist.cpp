@@ -29,8 +29,9 @@ void callback(ZipInfo* info, CDFile* file, size_t progress) {
 namespace GP {
 	
 	PList::PList(const char* filename) {
-		initialize();
 		_filename = filename;
+		_node = NULL;
+		_type = PLIST_NONE;
 		
 		FILE* file = NULL;
 		char* buffer = NULL;
@@ -56,15 +57,12 @@ namespace GP {
 	}
 	
 	PList::PList(const char* filename, char* data) {
-		initialize();
+		
 		_filename = filename;
-		setRootNode(data, strlen(data));
-	}
-
-	void PList::initialize() {
-		_filename = NULL;
 		_node = NULL;
 		_type = PLIST_NONE;
+		
+		setRootNode(data, strlen(data));
 	}
 
 	PList::~PList() {
