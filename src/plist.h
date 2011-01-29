@@ -21,10 +21,10 @@
 #define PLIST_H_
 
 #include "common.h"
+#include "memoryfile.h"
 
 extern "C" {
 	#include <plist/plist.h>
-	#include <partial/partial.h>  
 }
 
 namespace GP {

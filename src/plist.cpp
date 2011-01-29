@@ -21,11 +21,6 @@
 
 using namespace std;
 
-void callback(ZipInfo* info, CDFile* file, size_t progress) {
-	int percentDone = progress * 100/file->compressedSize;
-	cout << "[!!] Getting: " << percentDone << endl;
-}
-
 namespace GP {
 	
 	PList::PList(const char* filename) {
@@ -106,41 +101,8 @@ namespace GP {
 	}
 	
 	PList* PList::fromPartial(const char* container, const char* filename) {
-		cout << "[*] Extracting PList using partial-zip" << endl;
-		int len = strlen(container);
 		
-		char fname[len+7]; //account for file:// if it's missing
-		bzero(fname, len+7); // zeroize memory
-		
-		//Somebody forgot file:// or http://
-		if (strstr(container, "http://") == NULL && strstr(container, "file://") == NULL) {
-			strcpy(fname, "file://");
-		}
-		
-		strcat(fname, container);
-		
-		ZipInfo* info = PartialZipInit(fname);
-		
-		if (info == NULL) {
-			cout << "[X] Failed to open url: " << fname << " (aborting)" << endl;
-			return NULL;
-		}
-		
-		PartialZipSetProgressCallback(info, callback);
-		CDFile* file = PartialZipFindFile(info, filename);
-		
-		if (!file) {
-			cout << "[X] Failed to find file (" << filename << ") in stream (aborting)" << endl;
-			return NULL;
-		}
-		
-		unsigned char* buffer = PartialZipGetFile(info, file);
-		int bufferLen = file->size;
-		
-		buffer = (unsigned char*)realloc(buffer, bufferLen+1);
-		buffer[bufferLen] = '\0';
-		
-		return (PList*)(new PList(filename, (char*)buffer));
+		return (PList*)(new PList(filename, (char*)MemoryFile::fromPartial(container, filename)));
 	}
 	
 	void PList::setRootNode(char* buffer, int length) {
