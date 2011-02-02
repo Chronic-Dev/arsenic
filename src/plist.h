@@ -42,7 +42,7 @@ namespace GP {
 		long int getType(const char* node_name);
 		long int getType(plist_t node);
 		void getStringValue(const char* key, char** value);
-		void getBoolValue(const char* key, uint8_t** value);
+		bool getBoolValue(const char* key);
 		
 	private:
 		void setRootNode(char* buffer, int length);

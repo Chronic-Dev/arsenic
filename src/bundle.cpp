@@ -27,13 +27,9 @@ namespace GP {
 		
 		//Create the bundle map
 		_plist = new PList(bundleMap);
-		uint8_t* test = 0;
-		_plist->getBoolValue((const char*)"TestBool", &test);
 		
-		cout << "TESTBOOL: " << test << endl;
-		
-		_plist->getBoolValue((const char*)"TestBool2", &test);
-		cout << " TESTBOOL2: " << test << endl;
+		// cout << "TESTBOOL: " << _plist->getBoolValue("TestBool") << endl;
+		// cout << "TESTBOOL2: " << _plist->getBoolValue("TestBool2") << endl;
 	}
 	
 	Bundle::~Bundle() {
