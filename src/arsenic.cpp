@@ -18,6 +18,7 @@
  **/
 
 #include "arsenic.h"
+#include "bundle.h"
 
 using namespace std;
 
@@ -62,6 +63,8 @@ namespace GP {
 		}
 		
 		bool shutdown = false;
+		
+		Bundle* test = new Bundle(NULL, NULL, "./bundles/map.plist");
 		
 		while ((opt = getopt_long(argc, argv, "hi:", longOpts, &optIndex)) > 0) {
 			

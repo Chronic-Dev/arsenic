@@ -18,6 +18,7 @@
  **/
 
 #include "common.h"
+#include "plist.h"
 
 extern "C" {
 	#include <dirent.h>
@@ -28,7 +29,7 @@ namespace GP {
 	class Bundle {
 		
 	public:
-		Bundle(const char* productType, const char* productBuild);
+		Bundle(const char* productType, const char* productBuild, const char* bundleMap);
 		~Bundle();
 		
 		static bool exists(const char* productType, const char* productBuild);
@@ -36,6 +37,6 @@ namespace GP {
 	private:
 		const char* _type;
 		const char* _build;
-	
+		PList* _plist;
 	};
 }

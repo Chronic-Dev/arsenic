@@ -23,8 +23,17 @@ using namespace std;
 
 namespace GP {
 	
-	Bundle::Bundle(const char* productType, const char* productBuild) {
+	Bundle::Bundle(const char* productType, const char* productBuild, const char* bundleMap) {
 		
+		//Create the bundle map
+		_plist = new PList(bundleMap);
+		uint8_t* test = 0;
+		_plist->getBoolValue((const char*)"TestBool", &test);
+		
+		cout << "TESTBOOL: " << test << endl;
+		
+		_plist->getBoolValue((const char*)"TestBool2", &test);
+		cout << " TESTBOOL2: " << test << endl;
 	}
 	
 	Bundle::~Bundle() {

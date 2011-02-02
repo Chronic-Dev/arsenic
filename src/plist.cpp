@@ -100,6 +100,19 @@ namespace GP {
 		}
 	}
 	
+	void PList::getBoolValue(const char* key, uint8_t** value) {
+		if (_type == PLIST_DICT) {
+			plist_t node = NULL;
+			
+			if ((node = plist_dict_get_item(_node, key)) != NULL) {
+				if (getType(node) == PLIST_BOOLEAN) {
+					plist_get_bool_val(node, value);
+					cout << "[BOOL :O] " << value << endl;
+				}
+			}
+		}
+	}
+	
 	PList* PList::fromPartial(const char* container, const char* filename) {
 		
 		return (PList*)(new PList(filename, (char*)MemoryFile::fromPartial(container, filename)->getData()));
