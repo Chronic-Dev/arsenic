@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
 	int ret;
 
 	if ((ret = arsenic.initialize(argc, argv)) != ARSENIC_INIT_OK && ret != ARSENIC_INIT_SHUTDOWN) {
-
+		
 		shutdown("Failed to initialize arsenic", -1);
 	}
 

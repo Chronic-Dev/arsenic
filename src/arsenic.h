@@ -32,6 +32,7 @@ extern "C" {
 
 #include "common.h"
 #include "plist.h"
+#include "bundle.h"
 
 namespace GP {
 
@@ -41,7 +42,10 @@ namespace GP {
 		static Arsenic* _instance;
 		static bool _instanceFlag;
 		const char* _ipswName;
+		
 		PList* _ipsw;
+		Bundle* _bundle;
+		
 		char* _productType;
 		char* _productBuild;
 		// Arsenic();

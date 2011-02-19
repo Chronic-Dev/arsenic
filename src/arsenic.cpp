@@ -18,7 +18,6 @@
 **/
 
 #include "arsenic.h"
-#include "bundle.h"
 
 using namespace std;
 
@@ -37,10 +36,13 @@ namespace GP {
 
 	Arsenic::~Arsenic() {
 
-		if (_productBuild != NULL)
+		if (_productBuild != NULL) {
 			free(_productBuild);
-		if (_productType != NULL)
+		}
+		
+		if (_productType != NULL) {
 			free(_productType);
+		}
 	}
 
 	Arsenic &Arsenic::getInstance() {
@@ -61,10 +63,10 @@ namespace GP {
 		if (! (argc >= 2)) {
 			
 			usage();
-			return ARSENIC_INIT_BAD_ARGS;
+			return ARSENIC_INIT_SHUTDOWN;
 		}
 
-		bool shutdown = false;
+		int shutdown = ARSENIC_INIT_OK;
 
 		//Bundle* test = new Bundle(NULL, NULL, "./bundles/map.plist");
 
@@ -73,7 +75,7 @@ namespace GP {
 			switch (opt) {
 				case 'h':
 				usage();
-				shutdown = true;
+				shutdown = ARSENIC_INIT_SHUTDOWN;
 				break;
 
 				case 'i':
@@ -83,7 +85,7 @@ namespace GP {
 				if (_ipsw == NULL) {
 
 					cout << "[X] Failed to open ipsw (aborting)" << endl;
-					shutdown = true;
+					shutdown = ARSENIC_INIT_ERROR;
 					break;
 				}
 				break;
@@ -94,13 +96,10 @@ namespace GP {
 				
 				default:
 				usage();
-				shutdown = true;
+				shutdown = ARSENIC_INIT_SHUTDOWN;
 				break;
 			}
 		}
-
-		if (shutdown)
-			return ARSENIC_INIT_SHUTDOWN;
 
 		if (_ipsw != NULL) {
 
@@ -108,16 +107,16 @@ namespace GP {
 			_ipsw->getStringValue("ProductBuildVersion", &_productBuild);
 		}
 
-		return ARSENIC_INIT_OK;
+		return shutdown;
 	}
 
 	void Arsenic::usage() {
 
 		cout << "Usage: arsenic [OPTIONS] IPSW" << endl;
-		cout << "Create and restore custom firmwares file to an iPhone/iPod Touch." << endl;
+		cout << "Create and restore a custom firmware to an iDevice (iPhone/iPod Touch/iPad/AppleTV)." << endl;
 		cout << "  -h, --help\t\tprints usage information" << endl;
-		cout << "  -i, --ipsw [filename]\t\tthe ipsw to work from" << endl;
 		cout << "  -v, --version\t\tprints version information" << endl;
+		cout << "  -i, --ipsw [filename]\tthe ipsw to work from" << endl;
 		cout << endl;
 	}
 }
