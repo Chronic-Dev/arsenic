@@ -32,8 +32,8 @@ int shutdown(const char* message, int code) {
 int main(int argc, char* argv[]) {
 
 	cout << endl;
-	cout << "GreenPois0n Arsenic" << endl;
-	cout << "Copyright (C) 2010 Chronic-Dev Team" << endl;
+	cout << "GreenPois0n Arsenic (" << PACKAGE_STRING << ")" << endl;
+	cout << "Copyright (C) 2010 Chronic-Dev Team (" << PACKAGE_BUGREPORT << ")" << endl;
 	cout << endl;
 
 	cout << "This program is free software: you can redistribute it and/or modify" << endl;

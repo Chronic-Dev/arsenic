@@ -28,9 +28,10 @@ namespace GP {
 	bool Arsenic::_instanceFlag = false;
 
 	static struct option longOpts[] = {
-		{ "help",     no_argument,	   NULL, 'h' },
-		{ "ipsw",     1,               NULL, 'i' },
-		{  NULL,      0,               NULL,  0  }
+		{ "help",     0,	NULL, 'h' },
+		{ "version",  0,	NULL, 'v' },
+		{ "ipsw",     1,	NULL, 'i' },
+		{  NULL,      0,	NULL,  0  }
 	};
 
 
@@ -65,9 +66,9 @@ namespace GP {
 
 		bool shutdown = false;
 
-		Bundle* test = new Bundle(NULL, NULL, "./bundles/map.plist");
+		//Bundle* test = new Bundle(NULL, NULL, "./bundles/map.plist");
 
-		while ((opt = getopt_long(argc, argv, "hi:", longOpts, &optIndex)) > 0) {
+		while ((opt = getopt_long(argc, argv, "hvi:", longOpts, &optIndex)) > 0) {
 
 			switch (opt) {
 				case 'h':
@@ -86,7 +87,11 @@ namespace GP {
 					break;
 				}
 				break;
-
+				
+				case 'v':
+				cout << "version: " << VERSION << endl;
+				break;
+				
 				default:
 				usage();
 				shutdown = true;
@@ -112,6 +117,7 @@ namespace GP {
 		cout << "Create and restore custom firmwares file to an iPhone/iPod Touch." << endl;
 		cout << "  -h, --help\t\tprints usage information" << endl;
 		cout << "  -i, --ipsw [filename]\t\tthe ipsw to work from" << endl;
+		cout << "  -v, --version\t\tprints version information" << endl;
 		cout << endl;
 	}
 }
