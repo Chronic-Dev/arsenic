@@ -27,13 +27,15 @@ namespace GP {
 
 		//Create the bundle map
 		_plist = new PList(bundleMap);
-
-		// cout << "TESTBOOL: " << _plist->getBoolValue("TestBool") << endl;
-		// cout << "TESTBOOL2: " << _plist->getBoolValue("TestBool2") << endl;
+		_build = productBuild;
+		_type = productType;
 	}
 
 	Bundle::~Bundle() {
-
+		
+		delete _plist;
+		delete _build;
+		delete _type;
 	}
 
 	bool Bundle::exists(const char* productType, const char* productBuild) {
