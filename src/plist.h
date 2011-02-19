@@ -38,11 +38,11 @@ namespace GP {
 		~PList();
 
 		static PList* fromPartial(const char* container, const char* filename);
-		PList* getPlist(const char* key);
+		PList* getNode(const char* key);
 
 		//Methods
-		long int getType(const char* node_name);
-		long int getType(plist_t node);
+		plist_type getType(const char* node_name);
+		plist_type getType(plist_t node);
 		void getStringValue(const char* key, char** value);
 		bool getBoolValue(const char* key);
 

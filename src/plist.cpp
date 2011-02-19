@@ -55,7 +55,7 @@ namespace GP {
 		setRootNode(buffer, len);
 	}
 
-	PList(const char* filename, plist_t node) {
+	PList::PList(const char* filename, plist_t node, plist_type type) {
 
 		_filename = filename;
 		_node = node;
@@ -83,7 +83,7 @@ namespace GP {
 		}
 	}
 
-	long int PList::getType(const char* node_name) {
+	plist_type PList::getType(const char* node_name) {
 		
 		if (_type == PLIST_DICT) {
 			
@@ -95,17 +95,17 @@ namespace GP {
 			}
 		}
 
-		return NULL;
+		return PLIST_NONE;
 	}
 
-	long int PList::getType(plist_t node) {
+	plist_type PList::getType(plist_t node) {
 		
 		if (node != NULL) {
 			
 			return plist_get_node_type(node);
 		}
 
-		return NULL;
+		return PLIST_NONE;
 	}
 
 	void PList::getStringValue(const char* key, char **value) {
@@ -153,7 +153,7 @@ namespace GP {
 		return (PList*)(new PList(filename, (char*)MemoryFile::fromPartial(container, filename)->getData()));
 	}
 
-	PList* getNode(const char* key) {
+	PList* PList::getNode(const char* key) {
 
 		if (_type == PLIST_DICT) {
 			
@@ -165,7 +165,7 @@ namespace GP {
 			}
 		}
 
-		return (PList*)(new PList(filename, (char*)));
+		return NULL;
 	}
 
 	void PList::setRootNode(char* buffer, int length) {
@@ -194,7 +194,7 @@ namespace GP {
 
 		if(_node != NULL) {
 			
-			plist_free(_node)
+			plist_free(_node);
 		}
 
 		plist_from_xml(buffer, length, &_node);
