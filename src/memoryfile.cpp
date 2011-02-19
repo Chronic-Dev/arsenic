@@ -30,6 +30,7 @@ void callback(ZipInfo* info, CDFile* file, size_t progress) {
 namespace GP {
 
 	MemoryFile::MemoryFile(const char* filename, unsigned char* data) {
+		
 		_fileName = filename;
 		_data = data;
 	}
