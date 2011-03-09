@@ -19,6 +19,7 @@ AC_CHECK_LIB([partial], [PartialZipGetFile], [], [AC_MSG_ERROR(libpartial not fo
 AC_CHECK_LIB([plist], [plist_from_bin], [], [AC_MSG_ERROR(libplist not found)])
 AC_CHECK_LIB([xml2], [xmlParseFile], [], [AC_MSG_ERROR(libxml2 not found)])
 AC_CHECK_LIB([z], [gzread], [], [AC_MSG_ERROR(zlib not found)])
+AC_CHECK_LIB([ssl], [SSL_library_init], [], [AC_MSG_ERROR(ssl not found)])
 
 # Checks for header files.
 

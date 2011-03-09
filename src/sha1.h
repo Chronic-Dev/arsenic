@@ -23,6 +23,9 @@
 #include "common.h"
 #include "memoryfile.h"
 
+#include <cstring>
+#include <openssl/sha.h>
+
 namespace GP {
 
 	class SHA1 {
