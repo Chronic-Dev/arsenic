@@ -46,10 +46,10 @@ namespace GP
         memset(digest, '\0', SHA_DIGEST_LENGTH);
         
         SHA1_Init(&ctx);
-        SHA1_Update(&ctx, file->getData(), strlen(file->getData()));
+        SHA1_Update(&ctx, file->getData(), strlen((const char*)file->getData()));
         SHA1_Final(digest, &ctx);
         
-        return new (SHA1*)SHA1(digest);
+        return (SHA1*)new SHA1(digest);
     }
     
     unsigned char* SHA1::getHash() {
@@ -57,7 +57,7 @@ namespace GP
         return _hash;
     }
     
-    bool equals(SHA1* compare) {
+    bool SHA1::equals(SHA1* compare) {
         
         if(! memcmp(_hash, compare->getHash(), 0x20)) {
             

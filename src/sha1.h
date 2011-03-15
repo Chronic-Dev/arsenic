@@ -38,7 +38,7 @@ namespace GP {
 	private:
 		unsigned char* _hash;
         
-        SHA1(const char* hash);
+        SHA1(unsigned char* hash);
         ~SHA1();
 	};
 }
