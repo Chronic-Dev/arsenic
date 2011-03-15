@@ -21,7 +21,7 @@
 #define PLIST_H_
 
 #include "common.h"
-#include "memoryfile.h"
+#include "memory_file.h"
 
 extern "C" {
 	#include <plist/plist.h>

@@ -22,8 +22,7 @@
 
 #include <cstdio>
 #include <cstring>
-#include "AbstractFile.h"
-#include "Image3Element.h"
+#include "image3_element.h"
 
 namespace GP {
 

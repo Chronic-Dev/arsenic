@@ -18,7 +18,7 @@
 **/
 
 #include <cstring>
-#include "Image3Element.h"
+#include "image3_element.h"
 
 namespace GP {
 

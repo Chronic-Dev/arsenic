@@ -19,10 +19,9 @@
 
 #include <openssl/aes.h>
 
-#include "Image3File.h"
-#include "Image3Element.h"
-#include "AbstractFile.h"
-#include "MemoryFile.h"
+#include "image3_file.h"
+#include "image3_element.h"
+#include "memory_file.h"
 
 namespace GP {
 

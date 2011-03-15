@@ -21,7 +21,7 @@
 #define SHA1_H_
 
 #include "common.h"
-#include "memoryfile.h"
+#include "memory_file.h"
 
 #include <cstring>
 #include <openssl/sha.h>

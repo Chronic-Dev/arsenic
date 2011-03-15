@@ -17,7 +17,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#include "memoryfile.h"
+#include "memory_file.h"
 
 using namespace std;
 
