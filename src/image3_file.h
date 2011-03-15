@@ -57,29 +57,29 @@ public:
 
 protected:
 	bool mIsDecrypted;
-	unsigned char* mIV;
-	unsigned char* mKey;
-	unsigned char* mPatched;
-	unsigned char* mOriginal;
-	unsigned char* mDecrypted;
-	unsigned int mSignature;
-	unsigned int mDataSize;
-	unsigned int mFullSize;
-	unsigned int mShshOffset;
-	unsigned int mImageType;
+	unsigned char* _IV;
+	unsigned char* _key;
+	unsigned char* _patched;
+	unsigned char* _original;
+	unsigned char* _decrypted;
+	unsigned int _signature;
+	unsigned int _dataSize;
+	unsigned int _fullSize;
+	unsigned int _shshOffset;
+	unsigned int _imageType;
 
-	AbstractFile* mFile;
-	Image3Header* mHeader;
-	Image3Element* mTypeElement;
-	Image3Element* mDataElement;
-	Image3Element* mVersElement;
-	Image3Element* mSepoElement;
-	Image3Element* mBordElement;
-	Image3Element* mKbag1Element;
-	Image3Element* mKbag2Element;
-	Image3Element* mEcidElement;
-	Image3Element* mShshElement;
-	Image3Element* mCertElement;
+	AbstractFile* _file;
+	Image3Header* _header;
+	Image3Element* _typeElement;
+	Image3Element* _dataElement;
+	Image3Element* _versElement;
+	Image3Element* _sepoElement;
+	Image3Element* _bordElement;
+	Image3Element* _kbag1Element;
+	Image3Element* _kbag2Element;
+	Image3Element* _EcidElement;
+	Image3Element* _shshElement;
+	Image3Element* _certElement;
 };
 
 }
