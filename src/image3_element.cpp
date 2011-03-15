@@ -1,7 +1,7 @@
 /**
 * GreenPois0n Arsenic
 * Copyright (C) 2010-2011 Chronic-Dev Team
-* Copyright (C) 2010-2011 GreySyntax
+* Copyright (C) 2010-2011 Joshua Hill
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,14 +17,22 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#include "common.h"
+#include <cstring>
+#include "Image3Element.h"
 
 namespace GP {
 
-	class HFSVolume {
+Image3Element::Image3Element(Image3ElementHeader* header, unsigned char* data) :
+	mData(0), mHeader(0), mSignature(0), mFullSize(0), mDataSize(0)   {
+	mData = data;
+	mHeader = header;
+	mSignature = mHeader->signature;
+	mFullSize = mHeader->full_size;
+	mDataSize =  mHeader->data_size;
+}
 
-	public:
-		HFSVolume();
-		~HFSVolume();
-	};
+Image3Element::~Image3Element() {
+
+}
+
 }

@@ -1,7 +1,8 @@
 /**
 * GreenPois0n Arsenic
-* Copyright (C) 2010 Chronic-Dev Team
-* Copyright (C) 2010 GreySyntax
+* Copyright (C) 2010-2011 Chronic-Dev Team
+* Copyright (C) 2010-2011 GreySyntax
+* Copyright (C) 2010-2011 Joshua Hill
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
