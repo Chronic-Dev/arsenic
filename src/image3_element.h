@@ -73,12 +73,12 @@ public:
 	}
 
 protected:
-	unsigned char* mData;
-	unsigned int mDataSize;
-	unsigned int mFullSize;
-	unsigned int mSignature;
-	Image3ElementType mType;
-	Image3ElementHeader* mHeader;
+	unsigned char* _data;
+	unsigned int _dataSize;
+	unsigned int _fullSize;
+	unsigned int _signature;
+	Image3ElementType _type;
+	Image3ElementHeader* _header;
 };
 
 }

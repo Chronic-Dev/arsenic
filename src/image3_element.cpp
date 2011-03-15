@@ -23,12 +23,12 @@
 namespace GP {
 
 Image3Element::Image3Element(Image3ElementHeader* header, unsigned char* data) :
-	mData(0), mHeader(0), mSignature(0), mFullSize(0), mDataSize(0)   {
-	mData = data;
-	mHeader = header;
-	mSignature = mHeader->signature;
-	mFullSize = mHeader->full_size;
-	mDataSize =  mHeader->data_size;
+	_Data(0), _header(0), _signature(0), _fullSize(0), _dataSize(0)   {
+	_data = data;
+	_header = header;
+	_signature = mHeader->signature;
+	=_fullSize = mHeader->full_size;
+	_dataSize =  mHeader->data_size;
 }
 
 Image3Element::~Image3Element() {
