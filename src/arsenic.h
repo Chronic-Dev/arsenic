@@ -33,9 +33,14 @@ extern "C" {
 #include "common.h"
 #include "plist.h"
 #include "bundle.h"
+#include "image3_file.h"
+
+#include <map>
 
 namespace GP {
-
+	
+	typedef std::map<const char*, Image3File> Image3Map;
+	
 	class Arsenic {
 
 	private:
@@ -48,7 +53,7 @@ namespace GP {
 		
 		char* _productType;
 		char* _productBuild;
-		// Arsenic();
+		Image3Map _image3map;
 
 	public:
 		static Arsenic &getInstance();
