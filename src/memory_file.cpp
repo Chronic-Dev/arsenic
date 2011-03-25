@@ -109,8 +109,8 @@ namespace GP {
 	
 	unsigned char* MemoryFile::getData(int chunk) {
 		
-		unsigned char* buffer = (unsigned char*)malloc((chunk + 1));
-		bzero(buffer, (chunk + 1));
+		unsigned char* buffer = (unsigned char*)malloc(chunk);
+		bzero(buffer, chunk);
 		
 		if (buffer == NULL) {
 			
@@ -119,7 +119,7 @@ namespace GP {
 		}
 		
 		memcpy(buffer, _data, chunk);
-		return &*buffer;
+		return buffer;
 	}
 
 	bool MemoryFile::writeFile(const char* filename) {
