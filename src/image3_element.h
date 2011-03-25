@@ -48,29 +48,12 @@ public:
 	Image3Element(Image3ElementHeader* header, unsigned char* data);
 	virtual ~Image3Element();
 
-	unsigned char* getData() {
-		return mData;
-	}
-
-	unsigned int getFullSize() {
-		return mFullSize;
-	}
-
-	unsigned int getDataSize() {
-		return mDataSize;
-	}
-
-	unsigned int getSignature() {
-		return mSignature;
-	}
-
-	Image3ElementType getType() {
-		return mType;
-	}
-
-	Image3ElementHeader* getHeader() {
-		return mHeader;
-	}
+	unsigned char* getData();
+	unsigned int getFullSize();
+	unsigned int getDataSize();
+	unsigned int getSignature();
+	Image3ElementType getType();
+	Image3ElementHeader* getHeader();
 
 protected:
 	unsigned char* _data;

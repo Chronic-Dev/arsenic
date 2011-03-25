@@ -23,6 +23,7 @@
 #include <cstdio>
 #include <cstring>
 #include "image3_element.h"
+#include "memory_file.h"
 
 namespace GP {
 
@@ -46,8 +47,8 @@ public:
 	Image3File();
 	virtual ~Image3File();
 
-	static Image3File* open(AbstractFile* file);
-	AbstractFile* decrypt(const char* key = NULL, const char* iv = NULL);
+	static Image3File* open(MemoryFile* file);
+	MemoryFile* decrypt(const char* key = NULL, const char* iv = NULL);
 
 	Image3File* setIV(const char* iv);
 	Image3File* setKey(const char* key);
@@ -56,7 +57,7 @@ public:
 	Image3Element* getElement(Image3ElementType type);
 
 protected:
-	bool mIsDecrypted;
+	bool _isDecrypted;
 	unsigned char* _IV;
 	unsigned char* _key;
 	unsigned char* _patched;
@@ -68,7 +69,7 @@ protected:
 	unsigned int _shshOffset;
 	unsigned int _imageType;
 
-	AbstractFile* _file;
+	MemoryFile* _file;
 	Image3Header* _header;
 	Image3Element* _typeElement;
 	Image3Element* _dataElement;
@@ -77,7 +78,7 @@ protected:
 	Image3Element* _bordElement;
 	Image3Element* _kbag1Element;
 	Image3Element* _kbag2Element;
-	Image3Element* _EcidElement;
+	Image3Element* _ecidElement;
 	Image3Element* _shshElement;
 	Image3Element* _certElement;
 };

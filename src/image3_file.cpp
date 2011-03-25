@@ -26,101 +26,101 @@
 namespace GP {
 
 Image3File::Image3File() :
-	mIV(0), mKey(0), mOriginal(0), mFile(0), mHeader(0), mDecrypted(0),
-			mTypeElement(0), mDataElement(0), mVersElement(0), mSepoElement(0),
-			mBordElement(0), mKbag1Element(0), mKbag2Element(0),
-			mEcidElement(0), mShshElement(0), mCertElement(0) {
-	mIsDecrypted = false;
+	_IV(0), _key(0), _original(0), _file(0), _header(0), _decrypted(0),
+			_typeElement(0), _dataElement(0), _versElement(0), _sepoElement(0),
+			_bordElement(0), _kbag1Element(0), _kbag2Element(0),
+			_ecidElement(0), _shshElement(0), _certElement(0) {
+	_isDecrypted = false;
 }
 
 Image3File::~Image3File() {
-	if (mDecrypted) {
-		delete[] mDecrypted;
-		mDecrypted = NULL;
+	if (_decrypted) {
+		delete[] _decrypted;
+		_decrypted = NULL;
 	}
 
-	if(mIV) {
-		delete[] mIV;
-		mIV = NULL;
+	if(_IV) {
+		delete[] _IV;
+		_IV = NULL;
 	}
 
-	if(mKey) {
-		delete[] mKey;
-		mKey = NULL;
+	if(_key) {
+		delete[] _key;
+		_key = NULL;
 	}
 
-	if(mOriginal) {
-		delete mOriginal;
-		mOriginal = NULL;
+	if(_original) {
+		delete _original;
+		_original = NULL;
 	}
 
-	if(mFile) {
-		delete mFile;
-		mFile = NULL;
+	if(_file) {
+		delete _file;
+		_file = NULL;
 	}
 
-	if(mHeader) {
-		delete mHeader;
-		mHeader = NULL;
+	if(_header) {
+		delete _header;
+		_header = NULL;
 	}
 
-	if(mDecrypted) {
-		delete mDecrypted;
-		mDecrypted = NULL;
+	if(_decrypted) {
+		delete _decrypted;
+		_decrypted = NULL;
 	}
 
-	if(mTypeElement) {
-		delete mTypeElement;
-		mTypeElement = NULL;
+	if(_typeElement) {
+		delete _typeElement;
+		_typeElement = NULL;
 	}
 
-	if(mDataElement) {
-		delete mDataElement;
-		mDataElement = NULL;
+	if(_dataElement) {
+		delete _dataElement;
+		_dataElement = NULL;
 	}
 
-	if(mVersElement) {
-		delete mVersElement;
-		mVersElement = NULL;
+	if(_versElement) {
+		delete _versElement;
+		_versElement = NULL;
 	}
 
-	if(mSepoElement) {
-		delete mSepoElement;
-		mSepoElement = NULL;
+	if(_sepoElement) {
+		delete _sepoElement;
+		_sepoElement = NULL;
 	}
 
-	if(mBordElement) {
-		delete mBordElement;
-		mBordElement = NULL;
+	if(_bordElement) {
+		delete _bordElement;
+		_bordElement = NULL;
 	}
 
-	if(mKbag1Element) {
-		delete mKbag1Element;
-		mKbag1Element = NULL;
+	if(_kbag1Element) {
+		delete _kbag1Element;
+		_kbag1Element = NULL;
 	}
 
-	if(mKbag2Element) {
-		delete mKbag2Element;
-		mKbag2Element = NULL;
+	if(_kbag2Element) {
+		delete _kbag2Element;
+		_kbag2Element = NULL;
 	}
 
-	if(mEcidElement) {
-		delete mEcidElement;
-		mEcidElement = NULL;
+	if(_ecidElement) {
+		delete _ecidElement;
+		_ecidElement = NULL;
 	}
 
-	if(mShshElement) {
-		delete mShshElement;
-		mShshElement = NULL;
+	if(_shshElement) {
+		delete _shshElement;
+		_shshElement = NULL;
 	}
 
-	if(mCertElement) {
-		delete mCertElement;
-		mCertElement = NULL;
+	if(_certElement) {
+		delete _certElement;
+		_certElement = NULL;
 	}
 }
 
-Image3File* Image3File::open(AbstractFile* file) {
+Image3File* Image3File::open(MemoryFile* file) {
 	int size;
 	int offset;
 	Image3File* image;
@@ -134,96 +134,86 @@ Image3File* Image3File::open(AbstractFile* file) {
 		return NULL;
 	}
 
-	header = (Image3Header*) file->read(sizeof(Image3Header));
+	header = (Image3Header*) file->getData(sizeof(Image3Header));
 	if (header->signature != kImg3Container) {
 		return NULL;
 	}
-	image->mHeader = header;
+	image->_header = header;
 	offset += sizeof(Image3Header);
 
 	current = NULL;
 	while (offset < size) {
-		current = (Image3ElementHeader*) file->read(sizeof(Image3ElementHeader));
+		current = (Image3ElementHeader*) file->getData(sizeof(Image3ElementHeader));
 		if (current == NULL)
 			break;
 		switch (current->signature) {
 		case kTypeElement:
-			image->mTypeElement = new Image3Element(current, file->read(
-					current->full_size - sizeof(Image3ElementHeader)));
-			if (image->mTypeElement == NULL) {
+			image->_typeElement = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+			if (image->_typeElement == NULL) {
 				return NULL;
 			}
 			break;
 
 		case kDataElement:
-			image->mDataElement = new Image3Element(current, file->read(
-					current->full_size - sizeof(Image3ElementHeader)));
-			if (image->mDataElement == NULL) {
+			image->_dataElement = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+			if (image->_dataElement == NULL) {
 				return NULL;
 			}
 			break;
 
 		case kVersElement:
-			image->mVersElement = new Image3Element(current, file->read(
-					current->full_size - sizeof(Image3ElementHeader)));
-			if (image->mVersElement == NULL) {
+			image->_versElement = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+			if (image->_versElement == NULL) {
 				return NULL;
 			}
 			break;
 
 		case kSepoElement:
-			image->mSepoElement = new Image3Element(current, file->read(
-					current->full_size - sizeof(Image3ElementHeader)));
-			if (image->mSepoElement == NULL) {
+			image->_sepoElement = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+			if (image->_sepoElement == NULL) {
 				return NULL;
 			}
 			break;
 
 		case kBordElement:
-			image->mBordElement = new Image3Element(current, file->read(
-					current->full_size - sizeof(Image3ElementHeader)));
-			if (image->mBordElement == NULL) {
+			image->_bordElement = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+			if (image->_bordElement == NULL) {
 				return NULL;
 			}
 			break;
 
 		case kKbagElement:
-			if (image->mKbag1Element == NULL) {
-				image->mKbag1Element = new Image3Element(current, file->read(
-						current->full_size - sizeof(Image3ElementHeader)));
-				if (image->mKbag1Element == NULL) {
+			if (image->_kbag1Element == NULL) {
+				image->_kbag1Element = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+				if (image->_kbag1Element == NULL) {
 					return NULL;
 				}
 
 			} else {
-				image->mKbag2Element = new Image3Element(current, file->read(
-						current->full_size - sizeof(Image3ElementHeader)));
-				if (image->mKbag2Element == NULL) {
+				image->_kbag2Element = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+				if (image->_kbag2Element == NULL) {
 					return NULL;
 				}
 			}
 			break;
 
 		case kEcidElement:
-			image->mEcidElement = new Image3Element(current, file->read(
-					current->full_size - sizeof(Image3ElementHeader)));
-			if (image->mEcidElement == NULL) {
+			image->_ecidElement = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+			if (image->_ecidElement == NULL) {
 				return NULL;
 			}
 			break;
 
 		case kShshElement:
-			image->mShshElement = new Image3Element(current, file->read(
-					current->full_size - sizeof(Image3ElementHeader)));
-			if (image->mShshElement == NULL) {
+			image->_shshElement = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+			if (image->_shshElement == NULL) {
 				return NULL;
 			}
 			break;
 
 		case kCertElement:
-			image->mCertElement = new Image3Element(current, file->read(
-					current->full_size - sizeof(Image3ElementHeader)));
-			if (image->mCertElement == NULL) {
+			image->_certElement = new Image3Element(current, file->getData(current->full_size - sizeof(Image3ElementHeader)));
+			if (image->_certElement == NULL) {
 				return NULL;
 			}
 			break;
@@ -235,75 +225,75 @@ Image3File* Image3File::open(AbstractFile* file) {
 		offset += current->full_size - sizeof(Image3ElementHeader);
 	}
 
-	image->mFile = file;
-	image->mSignature = header->signature;
-	image->mDataSize = header->data_size;
-	image->mFullSize = header->full_size;
-	image->mShshOffset = header->shsh_offset;
-	image->mImageType = header->image_type;
+	image->_file = file;
+	image->_signature = header->signature;
+	image->_dataSize = header->data_size;
+	image->_fullSize = header->full_size;
+	image->_shshOffset = header->shsh_offset;
+	image->_imageType = header->image_type;
 	return image;
 }
 
-AbstractFile* Image3File::decrypt(const char* key, const char* iv) {
+MemoryFile* Image3File::decrypt(const char* key, const char* iv) {
 	AES_KEY aeskey;
 
 	if (iv) setIV(iv);
-	else if(!mIV) return NULL;
+	else if(!_IV) return NULL;
 
 	if (key) setKey(key);
-	else if(!mKey) return NULL;
+	else if(!_key) return NULL;
 
 	Image3Element* data_element = getElement(kDataElement);
 	if (!data_element)
 		return NULL;
 
-	if (mDecrypted) {
-		delete[] mDecrypted;
-		mDecrypted = NULL;
+	if (_decrypted) {
+		delete[] _decrypted;
+		_decrypted = NULL;
 	}
 
 	unsigned int data_size = data_element->getDataSize();
 	unsigned char* data_in = data_element->getData();
 	unsigned char* data_out = new unsigned char[data_size];
 	if (!data_out) return NULL;
-	mDecrypted = data_out;
+	_decrypted = data_out;
 
-	AES_set_decrypt_key(mKey, 256, &aeskey);
+	AES_set_decrypt_key(_key, 256, &aeskey);
 	AES_cbc_encrypt(data_in, data_out,
-			data_size, &aeskey, mIV, AES_DECRYPT);
+			data_size, &aeskey, _IV, AES_DECRYPT);
 
-	mIsDecrypted = true;
-	return MemoryFile::open(mDecrypted, data_size);
+	_isDecrypted = true;
+	return (new MemoryFile(_file->getName(), (unsigned char*)_decrypted));
 }
 
 Image3File* Image3File::setIV(const char* iv) {
 	int size = strlen(iv) / 2;
-	if (mIV) {
-		delete mIV;
-		mIV = NULL;
+	if (_IV) {
+		delete _IV;
+		_IV = NULL;
 	}
-	mIV = new unsigned char[size];
-	if (!mIV)
+	_IV = new unsigned char[size];
+	if (!_IV)
 		return NULL;
 
 	for (int i = 0; i < size; i++) {
-		sscanf(&iv[i * 2], "%02x", (unsigned int*) &mIV[i]);
+		sscanf(&iv[i * 2], "%02x", (unsigned int*) &_IV[i]);
 	}
 
 	return this;
 }
 Image3File* Image3File::setKey(const char* key) {
 	int size = strlen(key) / 2;
-	if (mKey) {
-		delete mKey;
-		mKey = NULL;
+	if (_key) {
+		delete _key;
+		_key = NULL;
 	}
-	mKey = new unsigned char[size];
-	if (!mKey)
+	_key = new unsigned char[size];
+	if (!_key)
 		return NULL;
 
-	for (int i = 0; i < size; i++) {char*char*
-		sscanf(&key[i * 2], "%02x", (unsigned int*) &mKey[i]);
+	for (int i = 0; i < size; i++) {
+		sscanf(&key[i * 2], "%02x", (unsigned int*) &_key[i]);
 	}
 
 	return this;
@@ -316,23 +306,23 @@ Image3File* Image3File::setKeyAndIV(const char* key, const char* iv) {
 Image3Element* Image3File::getElement(Image3ElementType type) {
 	switch (type) {
 	case kTypeElement:
-		return mTypeElement;
+		return _typeElement;
 	case kDataElement:
-		return mDataElement;
+		return _dataElement;
 	case kVersElement:
-		return mVersElement;
+		return _versElement;
 	case kSepoElement:
-		return mSepoElement;
+		return _sepoElement;
 	case kBordElement:
-		return mBordElement;
+		return _bordElement;
 	case kKbagElement:
-		return mKbag1Element;
+		return _kbag1Element;
 	case kEcidElement:
-		return mEcidElement;
+		return _ecidElement;
 	case kShshElement:
-		return mShshElement;
+		return _shshElement;
 	case kCertElement:
-		return mCertElement;
+		return _certElement;
 	default:
 		break;
 	}

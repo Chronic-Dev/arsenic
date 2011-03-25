@@ -30,19 +30,23 @@ namespace GP {
 
 	class MemoryFile {
 	public:
-
+		MemoryFile(const char* filename, unsigned char* data);
+		~MemoryFile();
+		
 		// Manipulate
 		static MemoryFile* openFile(const char* filename);
+		static MemoryFile* openFile(const char* filename, unsigned int chunk);
 		static MemoryFile* fromPartial(const char* container, const char* filename);
+		int size();
 		unsigned char* getData();
+		unsigned char* getData(int chunk);
 		bool writeFile(const char* filename);
-
+		const char* getName();
+		
 	private:
 		unsigned char* _data;
 		const char* _fileName;
-
-		MemoryFile(const char* filename, unsigned char* data);
-		~MemoryFile();
+		
 	};
 }
 

@@ -59,9 +59,32 @@ namespace GP {
 		fseek(file, 0, SEEK_END);
 		unsigned int len = ftell(file);
 		fseek(file, 0, SEEK_SET);
+		fclose(file);
 
-		char* data = (char*)malloc(len);
-		bzero(data, len);
+		return MemoryFile::openFile(filename, len);
+	}
+	
+	MemoryFile* MemoryFile::openFile(const char* filename, unsigned int chunk) {
+		
+		FILE* file = fopen(filename, "r");
+
+		if (file == NULL) {
+
+			cout << "Failed to open file (" << filename << ")." << endl;
+			return NULL;
+		}
+
+		fseek(file, 0, SEEK_END);
+		unsigned int len = ftell(file);
+		fseek(file, 0, SEEK_SET);
+		
+		if (chunk > len) {
+			cout << "Failed to read data, specified chunk (" << chunk << ") was to large." << endl;
+			return NULL;
+		}
+
+		char* data = (char*)malloc(chunk);
+		bzero(data, chunk);
 
 		if (data == NULL) {
 
@@ -69,15 +92,24 @@ namespace GP {
 			return NULL;
 		}
 
-		fread(data, 1, len, file);
+		fread(data, 1, chunk, file);
 		fclose(file);
 
 		return (new MemoryFile(filename, (unsigned char*)data));
 	}
-
+	
+	int MemoryFile::size() {
+		return sizeof(_data);
+	}
+	
 	unsigned char* MemoryFile::getData() {
 		
 		return &*_data;
+	}
+	
+	unsigned char* MemoryFile::getData(int chunk) {
+		
+		return &_data[chunk];
 	}
 
 	bool MemoryFile::writeFile(const char* filename) {
@@ -136,5 +168,10 @@ namespace GP {
 		buffer[bufferLen] = '\0';
 
 		return (new MemoryFile(filename, (unsigned char*)buffer));
+	}
+	
+	const char* MemoryFile::getName() {
+		
+		return _fileName;
 	}
 }

@@ -22,17 +22,41 @@
 
 namespace GP {
 
-Image3Element::Image3Element(Image3ElementHeader* header, unsigned char* data) :
-	_Data(0), _header(0), _signature(0), _fullSize(0), _dataSize(0)   {
-	_data = data;
-	_header = header;
-	_signature = mHeader->signature;
-	=_fullSize = mHeader->full_size;
-	_dataSize =  mHeader->data_size;
-}
+	Image3Element::Image3Element(Image3ElementHeader* header, unsigned char* data) :
+		_data(0), _header(0), _signature(0), _fullSize(0), _dataSize(0)   {
+		_data = data;
+		_header = header;
+		_signature = header->signature;
+		_fullSize = header->full_size;
+		_dataSize =  header->data_size;
+	}
 
-Image3Element::~Image3Element() {
+	Image3Element::~Image3Element() {
 
-}
+	}
+	
+	unsigned char* Image3Element::getData() {
+		return _data;
+	}
+
+	unsigned int Image3Element::getFullSize() {
+		return _fullSize;
+	}
+
+	unsigned int Image3Element::getDataSize() {
+		return _dataSize;
+	}
+
+	unsigned int Image3Element::getSignature() {
+		return _signature;
+	}
+
+	Image3ElementType Image3Element::getType() {
+		return _type;
+	}
+
+	Image3ElementHeader* Image3Element::getHeader() {
+		return _header;
+	}
 
 }
