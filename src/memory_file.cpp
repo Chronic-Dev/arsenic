@@ -109,7 +109,17 @@ namespace GP {
 	
 	unsigned char* MemoryFile::getData(int chunk) {
 		
-		return &_data[chunk];
+		unsigned char* buffer = (unsigned char*)malloc((chunk + 1));
+		bzero(buffer, (chunk + 1));
+		
+		if (buffer == NULL) {
+			
+			cout << "Failed to allocate memory." << endl;
+			return NULL;
+		}
+		
+		memcpy(buffer, _data, chunk);
+		return &*buffer;
 	}
 
 	bool MemoryFile::writeFile(const char* filename) {
