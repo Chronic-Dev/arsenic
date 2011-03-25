@@ -150,7 +150,7 @@ namespace GP {
 
 	PList* PList::fromPartial(const char* container, const char* filename) {
 
-		return (PList*)(new PList(filename, (char*)MemoryFile::fromPartial(container, filename)->getData()));
+		return (new PList(filename, (char*)MemoryFile::fromPartial(container, filename)->getData()));
 	}
 
 	PList* PList::getNode(const char* key) {
@@ -161,7 +161,7 @@ namespace GP {
 
 			if ((node = plist_dict_get_item(_node, key)) != NULL) {
 
-				return (PList*)(new PList(_filename, node, getType(node)));
+				return (new PList(_filename, node, getType(node)));
 			}
 		}
 
