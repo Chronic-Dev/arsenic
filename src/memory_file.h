@@ -42,6 +42,7 @@ namespace GP {
 		unsigned char* getData(int chunk);
 		bool writeFile(const char* filename);
 		const char* getName();
+		void patch(int offset, unsigned char* data);
 		
 	private:
 		unsigned char* _data;

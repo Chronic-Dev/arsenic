@@ -184,4 +184,9 @@ namespace GP {
 		
 		return _fileName;
 	}
+	
+	void MemoryFile::patch(int offset, unsigned char* data) {
+		
+		memcpy(data, &_data[offset], sizeof(data));
+	}
 }
