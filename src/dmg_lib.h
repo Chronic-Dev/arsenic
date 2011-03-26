@@ -2,7 +2,7 @@
 #define DMGLIB_H
 
 #include "dmg.h"
-#include "abstractfile.h"
+#include "abstract_file.h"
 
 #ifdef __cplusplus
 extern "C" {

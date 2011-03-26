@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 #include "hfs_plus.h"
-#include "abstractfile.h"
+#include "abstract_file.h"
 
 #define CHECKSUM_CRC32 0x00000002
 #define CHECKSUM_MKBLOCK 0x0002

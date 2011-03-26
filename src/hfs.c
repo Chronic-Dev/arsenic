@@ -287,12 +287,12 @@ void cmd_getattr(Volume* volume, int argc, const char *argv[]) {
 	free(record);
 }
 
-void TestByteOrder()
-{
-	short int word = 0x0001;
-	char *byte = (char *) &word;
-	endianness = byte[0] ? IS_LITTLE_ENDIAN : IS_BIG_ENDIAN;
-}
+// void TestByteOrder()
+// {
+// 	short int word = 0x0001;
+// 	char *byte = (char *) &word;
+// 	endianness = byte[0] ? IS_LITTLE_ENDIAN : IS_BIG_ENDIAN;
+// }
 
 
 // int main(int argc, const char *argv[]) {
