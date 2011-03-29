@@ -19,8 +19,6 @@
 
 #include "arsenic.h"
 #include "common.h"
-#include "hfs_plus.h"
-#include "hfs_lib.h"
 
 using namespace std;
 using namespace GP;
@@ -53,28 +51,5 @@ int main(int argc, char* argv[]) {
 		shutdown("Failed to initialize arsenic", -1);
 	}
 	
-	io_func* io;
-	Volume* volume;
-	
-	io = openFlatFile("./TestArsenic.dmg");
-	TestByteOrder();
-	
-	if (io == NULL) {
-		
-		shutdown("Cannot open image", -1);
-	}
-	
-	volume = openVolume(io);
-	
-	if (volume == NULL) {
-		
-		shutdown("Cannot open volume", -1);
-	}
-	
-	debugBTree(volume->catalogTree, TRUE);
-	hfs_ls(volume, "/");
-	
-	closeVolume(volume);
-	CLOSE(io);
 	return 0;
 }
