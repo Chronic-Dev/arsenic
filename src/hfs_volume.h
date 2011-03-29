@@ -32,17 +32,21 @@ namespace GP {
 	
 	class HFSVolume {
 	public:
-		HFSVolume* open(io_func* io)
+		~HFSVolume();
+		
+		HFSVolume* open(io_func* io);
 		void close();
 		void update();
 		
-		HFSPlusVolumeHeader* readHeader(io_func* io, HFSPlusVolumeHeader* volumeHeaderToWrite, off_t offset);
-		int writeHeader(io_func* io, HFSPlusVolumeHeader* volumeHeaderToWrite, off_t offset);
+		HFSPlusVolumeHeader* readHeader(off_t offset);
+		bool writeHeader(HFSPlusVolumeHeader* volumeHeaderToWrite, off_t offset);
 		
 		void flipForkData(HFSPlusForkData* forkData);
 			
 	private:
+		HFSVolume(io_func* io);
 		io_func* _io;
+		Volume* _volume;
 	};
 }
 #endif /* HFSVOLUME_H */
