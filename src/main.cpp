@@ -50,6 +50,6 @@ int main(int argc, char* argv[]) {
 		
 		shutdown("Failed to initialize arsenic", -1);
 	}
-
+	
 	return 0;
 }
