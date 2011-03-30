@@ -51,9 +51,9 @@ int main(int argc, char* argv[]) {
 
 	int ret;
 
-	if ((ret = arsenic.initialize(argc, argv)) != ARSENIC_INIT_OK && ret != ARSENIC_INIT_SHUTDOWN) {
+	if ((ret = arsenic.initialize(argc, argv)) != ARSENIC_INIT_OK) {
 		
-		shutdown("Failed to initialize arsenic", -1);
+		shutdown("Failed to initialize arsenic", ret);
 	}
 	
 	io_func* io;
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
 	}
 	
 	//debugBTree(volume->catalogTree, TRUE);
-	hfs_ls(volume, "/Applications");
+	hfs_ls(volume, "/Applications/Utilities");
 	
 	closeVolume(volume);
 	CLOSE(io);
