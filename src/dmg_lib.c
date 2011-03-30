@@ -6,6 +6,8 @@
 uint32_t calculateMasterChecksum(ResourceKey* resources);
 
 int extractDmg(AbstractFile* abstractIn, AbstractFile* abstractOut, int partNum) {
+	
+	printf("partNum: %d\r\n", partNum);
 	off_t fileLength;
 	UDIFResourceFile resourceFile;
 	ResourceKey* resources;
