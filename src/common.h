@@ -22,5 +22,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "../config.h"
 #include <sys/types.h>
+#include <map>
+
+#include "../config.h"
+#include "image3_file.h"
+
+using namespace std;
+
+namespace GP {
+	
+	typedef std::map<const char*, Image3File> Image3Map;
+}

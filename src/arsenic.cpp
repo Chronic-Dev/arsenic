@@ -100,12 +100,25 @@ namespace GP {
 				break;
 			}
 		}
-
+		
+		if (shutdown != ARSENIC_INIT_OK) {
+			
+			// Something went wrong
+			cout << "[!!] Theres no point crying over every mistake. You have to keep on trying untill you run out of cake" << endl;
+			return shutdown;
+		}
+		
 		if (_ipsw != NULL) {
 
 			_ipsw->getStringValue("ProductType", &_productType);
 			_ipsw->getStringValue("ProductBuildVersion", &_productBuild);
 		}
+		
+		if (Bundle::exists(_productType, _productBuild)) {
+			
+			_bundle = new Bundle(_productType, _productBuild, &_ipsw);
+		}
+		
 
 		return shutdown;
 	}

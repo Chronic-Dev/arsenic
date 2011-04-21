@@ -33,13 +33,8 @@ extern "C" {
 #include "common.h"
 #include "plist.h"
 #include "bundle.h"
-#include "image3_file.h"
-
-#include <map>
 
 namespace GP {
-	
-	typedef std::map<const char*, Image3File> Image3Map;
 	
 	class Arsenic {
 

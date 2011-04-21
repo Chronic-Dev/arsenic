@@ -20,8 +20,6 @@
 #include "arsenic.h"
 #include "common.h"
 #include "abstract_file.h"
-#include "hfs_plus.h"
-#include "hfs_lib.h"
 
 using namespace std;
 using namespace GP;
@@ -52,6 +50,10 @@ int main(int argc, char* argv[]) {
 	int ret;
 
 	if ((ret = arsenic.initialize(argc, argv)) != ARSENIC_INIT_OK) {
+		
+		if (ret == ARSENIC_INIT_SHUTDOWN) {
+			return ret;
+		}
 		
 		shutdown("Failed to initialize arsenic", ret);
 	}
