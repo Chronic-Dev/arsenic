@@ -30,11 +30,16 @@ extern "C" {
 	#include <plist/plist.h>
 }
 
+#include <map>
+
 #include "common.h"
 #include "plist.h"
 #include "bundle.h"
+#include "image3_file.h"
 
 namespace GP {
+	
+	typedef std::map<const char*, Image3File> Image3Map;
 	
 	class Arsenic {
 

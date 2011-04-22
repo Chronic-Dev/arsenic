@@ -116,7 +116,7 @@ namespace GP {
 		
 		if (Bundle::exists(_productType, _productBuild)) {
 			
-			_bundle = new Bundle(_productType, _productBuild, &_ipsw);
+			_bundle = new Bundle(_productType, _productBuild, _ipsw);
 		}
 
 		return shutdown;

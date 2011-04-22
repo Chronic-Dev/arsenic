@@ -23,10 +23,10 @@ using namespace std;
 
 namespace GP {
 
-	Bundle::Bundle(const char* productType, const char* productBuild, Plist** bundleMap) {
+	Bundle::Bundle(const char* productType, const char* productBuild, PList* bundleMap) {
 
 		//Create the bundle map
-		_plist = new PList(bundleMap);
+		_plist = bundleMap;
 		_build = productBuild;
 		_type = productType;
 	}

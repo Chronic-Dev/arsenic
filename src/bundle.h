@@ -29,7 +29,7 @@ namespace GP {
 	class Bundle {
 
 	public:
-		Bundle(const char* productType, const char* productBuild, PList** bundleMap);
+		Bundle(const char* productType, const char* productBuild, PList* bundleMap);
 		~Bundle();
 
 		static bool exists(const char* productType, const char* productBuild);

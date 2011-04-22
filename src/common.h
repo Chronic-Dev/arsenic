@@ -23,20 +23,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include <map>
 
 #include "../config.h"
-#include "image3_file.h"
 
-using namespace std;
-using namespace GP;
 
 #ifndef COMMON_H
 #define COMMON_H
 
-//namespace GP {
-	
-typedef map<const char*, Image3File> Image3Map;
-//}
 
 #endif /* COMMON_H */

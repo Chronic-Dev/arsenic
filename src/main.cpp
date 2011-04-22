@@ -19,7 +19,6 @@
 
 #include "arsenic.h"
 #include "common.h"
-#include "abstract_file.h"
 
 using namespace std;
 using namespace GP;
@@ -58,28 +57,5 @@ int main(int argc, char* argv[]) {
 		shutdown("Failed to initialize arsenic", ret);
 	}
 	
-	io_func* io;
-	Volume* volume;
-	
-	io = openFlatFile("rootfs2.dmg");
-	TestByteOrder();
-	
-	if (io == NULL) {
-		
-		shutdown("Cannot open image", -1);
-	}
-	
-	volume = openVolume(io);
-	
-	if (volume == NULL) {
-		
-		shutdown("Cannot open volume", -1);
-	}
-	
-	//debugBTree(volume->catalogTree, TRUE);
-	hfs_ls(volume, "/Applications/Utilities");
-	
-	closeVolume(volume);
-	CLOSE(io);
 	return 0;
 }
