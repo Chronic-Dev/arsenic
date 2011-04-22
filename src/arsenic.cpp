@@ -116,7 +116,12 @@ namespace GP {
 		
 		if (Bundle::exists(_productType, _productBuild)) {
 			
+			cout << "[!!] Found bundle for " << _productType << " with build " << _productBuild << endl;
 			_bundle = new Bundle(_productType, _productBuild, _ipsw);
+		} else {
+			
+			cout << "[X] Failed to locate bundle for " << _productType << " with build " << _productBuild << endl;
+			return ARSENIC_INIT_ERROR;
 		}
 
 		return shutdown;

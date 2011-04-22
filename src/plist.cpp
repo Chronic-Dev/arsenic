@@ -149,8 +149,16 @@ namespace GP {
 	}
 
 	PList* PList::fromPartial(const char* container, const char* filename) {
+		
+		MemoryFile* file = MemoryFile::fromPartial(container, filename);
+		
+		if (file == NULL) {
+			
+			cout << "[X] Failed to create PList from MemoryFile (NULL)" << endl;
+			return NULL;
+		}
 
-		return (new PList(filename, (char*)MemoryFile::fromPartial(container, filename)->getData()));
+		return (new PList(filename, (char*)file->getData()));
 	}
 
 	PList* PList::getNode(const char* key) {
