@@ -118,6 +118,8 @@ namespace GP {
 			
 			cout << "[!!] Found bundle for " << _productType << " with build " << _productBuild << endl;
 			_bundle = new Bundle(_productType, _productBuild, _ipsw);
+			
+			//TODO: Start partch operations..
 		} else {
 			
 			cout << "[X] Failed to locate bundle for " << _productType << " with build " << _productBuild << endl;
