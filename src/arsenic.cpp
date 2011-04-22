@@ -66,7 +66,7 @@ namespace GP {
 			return ARSENIC_INIT_SHUTDOWN;
 		}
 
-		int shutdown = ARSENIC_INIT_OK;
+		int shutdown = ARSENIC_INIT_SHUTDOWN;
 
 		//Bundle* test = new Bundle(NULL, NULL, "./bundles/map.plist");
 
@@ -88,6 +88,8 @@ namespace GP {
 					shutdown = ARSENIC_INIT_ERROR;
 					break;
 				}
+				
+				shutdown = ARSENIC_INIT_OK;
 				break;
 				
 				case 'v':
@@ -101,10 +103,14 @@ namespace GP {
 			}
 		}
 		
-		if (shutdown != ARSENIC_INIT_OK && !(shutdown == ARSENIC_INIT_SHUTDOWN)) {
+		if (shutdown != ARSENIC_INIT_OK) {
 			
-			// Something went wrong
-			cout << "[!!] Theres no point crying over every mistake. You have to keep on trying untill you run out of cake" << endl;
+			if (!(shutdown == ARSENIC_INIT_SHUTDOWN)) {
+				
+				// Something went wrong
+				cout << "[!!] Theres no point crying over every mistake. You have to keep on trying untill you run out of cake" << endl;
+			}
+			
 			return shutdown;
 		}
 		
@@ -112,18 +118,18 @@ namespace GP {
 
 			_ipsw->getStringValue("ProductType", &_productType);
 			_ipsw->getStringValue("ProductBuildVersion", &_productBuild);
-		}
-		
-		if (Bundle::exists(_productType, _productBuild)) {
 			
-			cout << "[!!] Found bundle for " << _productType << " with build " << _productBuild << endl;
-			_bundle = new Bundle(_productType, _productBuild, _ipsw);
-			
-			//TODO: Start partch operations..
-		} else {
-			
-			cout << "[X] Failed to locate bundle for " << _productType << " with build " << _productBuild << endl;
-			return ARSENIC_INIT_ERROR;
+			if (Bundle::exists(_productType, _productBuild)) {
+
+				cout << "[!!] Found bundle for " << _productType << " with build " << _productBuild << endl;
+				_bundle = new Bundle(_productType, _productBuild, _ipsw);
+
+				//TODO: Start partch operations..
+			} else {
+
+				cout << "[X] Failed to locate bundle for " << _productType << " with build " << _productBuild << endl;
+				return ARSENIC_INIT_ERROR;
+			}
 		}
 
 		return shutdown;
