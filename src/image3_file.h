@@ -27,61 +27,61 @@
 
 namespace GP {
 
-typedef enum {
-    kNorContainer  = 0x696D6733, // img3
-    kImg3Container = 0x496D6733, // Img3
-    k8900Container = 0x30303938, // 8900
-    kImg2Container = 0x494D4732  // IMG2
-} Image3Container;
+	typedef enum {
+	    kNorContainer  = 0x696D6733, // img3
+	    kImg3Container = 0x496D6733, // Img3
+	    k8900Container = 0x30303938, // 8900
+	    kImg2Container = 0x494D4732  // IMG2
+	} Image3Container;
 
-typedef struct {
-    unsigned int signature;
-    unsigned int full_size;
-    unsigned int data_size;
-    unsigned int shsh_offset;
-    unsigned int image_type;
-} Image3Header;
+	typedef struct {
+	    unsigned int signature;
+	    unsigned int full_size;
+	    unsigned int data_size;
+	    unsigned int shsh_offset;
+	    unsigned int image_type;
+	} Image3Header;
 
-class Image3File {
-public:
-	Image3File();
-	virtual ~Image3File();
+	class Image3File {
+	public:
+		Image3File();
+		virtual ~Image3File();
 
-	static Image3File* open(MemoryFile* file);
-	MemoryFile* decrypt(const char* key = NULL, const char* iv = NULL);
+		static Image3File* open(MemoryFile* file);
+		MemoryFile* decrypt(const char* key = NULL, const char* iv = NULL);
 
-	Image3File* setIV(const char* iv);
-	Image3File* setKey(const char* key);
-	Image3File* setKeyAndIV(const char* key, const char* iv);
+		Image3File* setIV(const char* iv);
+		Image3File* setKey(const char* key);
+		Image3File* setKeyAndIV(const char* key, const char* iv);
 
-	Image3Element* getElement(Image3ElementType type);
+		Image3Element* getElement(Image3ElementType type);
 
-protected:
-	bool _isDecrypted;
-	unsigned char* _IV;
-	unsigned char* _key;
-	unsigned char* _patched;
-	unsigned char* _original;
-	unsigned char* _decrypted;
-	unsigned int _signature;
-	unsigned int _dataSize;
-	unsigned int _fullSize;
-	unsigned int _shshOffset;
-	unsigned int _imageType;
+	protected:
+		bool _isDecrypted;
+		unsigned char* _IV;
+		unsigned char* _key;
+		unsigned char* _patched;
+		unsigned char* _original;
+		unsigned char* _decrypted;
+		unsigned int _signature;
+		unsigned int _dataSize;
+		unsigned int _fullSize;
+		unsigned int _shshOffset;
+		unsigned int _imageType;
 
-	MemoryFile* _file;
-	Image3Header* _header;
-	Image3Element* _typeElement;
-	Image3Element* _dataElement;
-	Image3Element* _versElement;
-	Image3Element* _sepoElement;
-	Image3Element* _bordElement;
-	Image3Element* _kbag1Element;
-	Image3Element* _kbag2Element;
-	Image3Element* _ecidElement;
-	Image3Element* _shshElement;
-	Image3Element* _certElement;
-};
+		MemoryFile* _file;
+		Image3Header* _header;
+		Image3Element* _typeElement;
+		Image3Element* _dataElement;
+		Image3Element* _versElement;
+		Image3Element* _sepoElement;
+		Image3Element* _bordElement;
+		Image3Element* _kbag1Element;
+		Image3Element* _kbag2Element;
+		Image3Element* _ecidElement;
+		Image3Element* _shshElement;
+		Image3Element* _certElement;
+	};
 
 }
 

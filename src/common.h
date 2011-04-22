@@ -29,8 +29,14 @@
 #include "image3_file.h"
 
 using namespace std;
+using namespace GP;
 
-namespace GP {
+#ifndef COMMON_H
+#define COMMON_H
+
+//namespace GP {
 	
-	typedef std::map<const char*, Image3File> Image3Map;
-}
+typedef map<const char*, Image3File> Image3Map;
+//}
+
+#endif /* COMMON_H */

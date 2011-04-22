@@ -118,7 +118,6 @@ namespace GP {
 			
 			_bundle = new Bundle(_productType, _productBuild, &_ipsw);
 		}
-		
 
 		return shutdown;
 	}
