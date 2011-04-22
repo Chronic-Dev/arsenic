@@ -66,7 +66,7 @@ namespace GP {
 			return ARSENIC_INIT_SHUTDOWN;
 		}
 
-		int shutdown = ARSENIC_INIT_SHUTDOWN;
+		int shutdown = ARSENIC_INIT_BAD_ARGS;
 
 		//Bundle* test = new Bundle(NULL, NULL, "./bundles/map.plist");
 
@@ -105,10 +105,13 @@ namespace GP {
 		
 		if (shutdown != ARSENIC_INIT_OK) {
 			
-			if (!(shutdown == ARSENIC_INIT_SHUTDOWN)) {
+			if (!(shutdown == ARSENIC_INIT_SHUTDOWN) && !(shutdown == ARSENIC_INIT_BAD_ARGS)) {
 				
 				// Something went wrong
 				cout << "[!!] Theres no point crying over every mistake. You have to keep on trying untill you run out of cake" << endl;
+			} else if (shutdown == ARSENIC_INIT_BAD_ARGS) {
+				
+				usage();
 			}
 			
 			return shutdown;
