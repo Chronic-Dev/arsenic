@@ -101,7 +101,7 @@ namespace GP {
 			}
 		}
 		
-		if (shutdown != ARSENIC_INIT_OK) {
+		if (shutdown != ARSENIC_INIT_OK && !(shutdown == ARSENIC_INIT_SHUTDOWN)) {
 			
 			// Something went wrong
 			cout << "[!!] Theres no point crying over every mistake. You have to keep on trying untill you run out of cake" << endl;
