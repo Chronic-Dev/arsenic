@@ -31,7 +31,7 @@
 namespace GP {
 	class HFS {
 	public:
-		HFS();
+		HFS(HFSVolume* volume);
 		~HFS();
 		void writeToFile(HFSPlusCatalogFile* file, MemoryFile* output);
 		void writeToHFSFile(HFSPlusCatalogFile* file, MemoryFile* input, HFSVolume* volume);
