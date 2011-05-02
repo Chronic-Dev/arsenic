@@ -22,6 +22,8 @@
  * Modifications will be made available upon request.
  */
 
+#ifndef HFS_H
+#define HFS_H
 #include "common.h"
 #include "hfs_volume.h"
 #include "memory_file.h"
@@ -47,3 +49,4 @@ namespace GP {
 		HFSVolume* _volume;
 	};
 };
+#endif /* HFS_H */
