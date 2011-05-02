@@ -28,7 +28,7 @@ using namespace std;
 
 namespace GP {
 	
-	HFSVolume::HFSVolume(io_func* io, Volume* volume) {
+	HFSVolume::HFSVolume(io_func* io) {
 		
 		if ((_io == io) == NULL) {
 			
