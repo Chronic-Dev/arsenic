@@ -8,7 +8,7 @@ lib_LTLIBRARIES = libxpwn-hfs.1.0.1.a libarsenic-core.2.0.0a libarsenic-util.2.0
 #libxpwn-hfs_1_0_1a_SOURCES = ???
 #libarsenic-core_2_0_0a_SOURCES = ??
 #libarsenic-util_2_0_0a_SOURCES = ??
-#libarsenic-io_2_0_0a_SOURCES = ??
+libarsenic-io_2_0_0a_SOURCES = io/memoryfile.cpp
 
 PROGRAMS = arsenic 
 #LDFLAGS =
