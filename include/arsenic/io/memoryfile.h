@@ -19,6 +19,11 @@
 
 #ifndef ARSENIC_IO_MEMORYFILE_
 #define ARSENIC_IO_MEMORYFILE_
+
+extern "C" {
+	#include <partial/partial.h>
+}
+
 namespace Arsenic {
 	namespace IO {
 		#define ARSENIC_IO_MEMORYFILE_READ "r"
