@@ -15,3 +15,5 @@ PROGRAMS = arsenic
 
 bin_PROGRAMS = arsenic
 #arsenic_SOURCES = arsenic.cpp
+
+dist_noinst_SCRIPTS = autogen.sh
