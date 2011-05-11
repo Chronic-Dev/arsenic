@@ -16,27 +16,3 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
-
-#include "common.h"
-#include "plist.h"
-
-extern "C" {
-	#include <dirent.h>
-}
-
-namespace GP {
-
-	class Bundle {
-
-	public:
-		Bundle(const char* productType, const char* productBuild, PList* bundleMap);
-		~Bundle();
-
-		static bool exists(const char* productType, const char* productBuild);
-
-	private:
-		const char* _type;
-		const char* _build;
-		PList* _plist;
-	};
-}

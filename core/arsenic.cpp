@@ -16,19 +16,3 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
-
-#include <iostream>
-#include <ctype.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-
-#include "../config.h"
-
-
-#ifndef COMMON_H
-#define COMMON_H
-
-
-#endif /* COMMON_H */

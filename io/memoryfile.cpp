@@ -16,37 +16,3 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
-
-/**
- * HFS based on parts of "xpwn", released under the GPLv3.
- * Modifications will be made available upon request.
- */
-
-#ifndef HFSVOLUME_H
-#define HFSVOLUME_H
-
-#include "common.h"
-#include "hfs_common.h"
-
-namespace GP {
-	
-	class HFSVolume {
-	public:
-		~HFSVolume();
-		
-		HFSVolume* open(io_func* io);
-		void close();
-		void update();
-		
-		HFSPlusVolumeHeader* readHeader(off_t offset);
-		bool writeHeader(HFSPlusVolumeHeader* volumeHeaderToWrite, off_t offset);
-		
-		void flipForkData(HFSPlusForkData* forkData);
-			
-	private:
-		HFSVolume(io_func* io);
-		io_func* _io;
-		Volume* _volume;
-	};
-}
-#endif /* HFSVOLUME_H */

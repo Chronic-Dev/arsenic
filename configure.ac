@@ -1,13 +1,7 @@
-#                                               -*- Autoconf -*-
-# Process this file with autoconf to produce a configure script.
-
-
-AC_INIT([arsenic], [0.1], [opensource@chronic-dev.org])
+AC_INIT([arsenic], [2.0], [opensource@chronic-dev.org])
 AC_PREREQ([2.63])
 AM_INIT_AUTOMAKE([arsenic], [0.1])
 AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_SRCDIR([src/arsenic.cpp])
-#AC_CONFIG_FILES([src/Makefile])
 
 # Checks for programs.
 AC_PROG_CXX
@@ -21,16 +15,8 @@ AC_CHECK_LIB([xml2], [xmlParseFile], [], [AC_MSG_ERROR(libxml2 not found)])
 AC_CHECK_LIB([z], [gzread], [], [AC_MSG_ERROR(zlib not found)])
 AC_CHECK_LIB([ssl], [SSL_library_init], [], [AC_MSG_ERROR(ssl not found)])
 
-# Checks for header files.
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
 
-# Checks for typedefs, structures, and compiler characteristics.
-AC_HEADER_STDBOOL
-AC_TYPE_SIZE_T
-AC_TYPE_UINT32_T
-
-# Checks for library functions.
-AC_FUNC_MALLOC
-AC_FUNC_REALLOC
-AC_CHECK_FUNCS([strstr])
-
-AC_OUTPUT(Makefile src/Makefile)
+# Checks for programs.
+AC_PROG_CXX
