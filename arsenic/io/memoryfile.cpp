@@ -134,5 +134,47 @@ namespace Arsenic {
 		unsigned char* MemoryFile::readAll() {
 			return mData;
 		}
+		
+		// File operations
+		bool MemoryFile::write(unsigned char* data) {
+			if (mData == NULL) {
+				LOG4CXX_ERROR(logger, "Data was uninitialized");
+				return false;
+			}
+			
+			memcpy(data, mData, 0);
+			return true;
+		}
+		
+		void MemoryFile::toFile(const char* file) {
+			
+			LOG4CXX_INFO(logger, "Change MemoryFile's location: " << file);
+			mFile = file;
+		}
+		
+		bool MemoryFile::save() {
+			
+			return save(ARSENIC_IO_MEMORYFILE_WRITE);
+		}
+		
+		bool MemoryFile::save(const char* flags) {
+			
+			FILE* file = fopen(mFile, flags);
+			
+			if (file == NULL) {
+				LOG4CXX_ERROR(logger, "Failed to open file for writing (" << mFile << ")");
+				return false;
+			}
+			
+			fwrite(mData, 1, sizeof(mData), file);
+			fclose(file);
+			
+			return true;
+		}
+		
+		int MemoryFile::size() {
+			
+			return strlen((const char*)mData);
+		}
 	}
 }

@@ -51,7 +51,7 @@ namespace Arsenic {
 			bool write(unsigned char* data);
 			void toFile(const char* file);
 			bool save();
-			bool save(int flags);
+			bool save(const char* flags);
 			int size();
 			
 		private:
