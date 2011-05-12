@@ -17,13 +17,19 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#include <arsenic/io/memoryfile.h>
-#include <arsenic/io/log.h>
+#include "memoryfile.h"
 
+using namespace std;
 using namespace Arsenic::IO;
 
 namespace Arsenic {
 	namespace IO {
+		
+		void partial_zip_callback(ZipInfo* info, CDFile* file, size_t progress) {
+
+			int percentDone = progress * 100/file->compressedSize;
+			LOG4CXX_INFO(logger, "Getting: " << percentDone);
+		}
 		
 		// Constructor
 		MemoryFile::MemoryFile(const char* file, unsigned char* data) {
@@ -34,7 +40,7 @@ namespace Arsenic {
 		// Destructor
 		MemoryFile::~MemoryFile() {
 			if (mData) {
-				free(mData_;
+				free(mData);
 			}
 			if (mFile) {
 				delete mFile;
@@ -46,7 +52,7 @@ namespace Arsenic {
 			FILE* file = fopen(filename, flags);
 			
 			if (file == NULL) {
-				Log.fatal("Failed to open file (" <<  filename << ")");
+				LOG4CXX_ERROR(logger, "Failed to open file: " << filename);
 				return NULL;
 			}
 			
@@ -58,7 +64,7 @@ namespace Arsenic {
 			fclose(file);
 			
 			if (data == NULL) {
-				Log.fatal("Failed to allocate memory");
+				LOG4CXX_ERROR(logger, "Failed to allocate memory");
 				return NULL;
 			}
 			
@@ -84,7 +90,7 @@ namespace Arsenic {
 			ZipInfo* info = PartialZipInit(fname);
 			
 			if (info == NULL) {
-				Log.fatal("Failed to open url: " << fname << " (aborting)");
+				LOG4CXX_ERROR(logger, "Failed to open url: " << fname);
 				return NULL;
 			}
 			
@@ -92,7 +98,7 @@ namespace Arsenic {
 			CDFile* file = PartialZipFindFile(info, filename);
 			
 			if (!file) {
-				Log.fatal("Failed to find (" << filename << ") in the stream (aborting)");
+				LOG4CXX_ERROR(logger, "Failed to find file: " << filename << " in the stream");
 				return NULL;
 			}
 			
@@ -100,7 +106,7 @@ namespace Arsenic {
 			int dataLength = file->size;
 			
 			data = (unsigned char*)realloc(data, dataLength+1);
-			data[dataLenth] = '\0';
+			data[dataLength] = '\0';
 			
 			return new MemoryFile(filename, data);
 		}
@@ -109,14 +115,14 @@ namespace Arsenic {
 		unsigned char* MemoryFile::read(int length) {
 			
 			// Yo Dawg, your reading a file in a file in a file
-			if (length > strlen(mData)) {
+			if (length > strlen((const char*)mData)) {
 				return NULL;
 			}
 			
-			char* buffer = (char*)calloc(length, char);
+			char* buffer = (char*)calloc(length, sizeof(char));
 			
 			if (buffer == NULL) {
-				Log.fatal("Failed to allocate memory");
+				LOG4CXX_ERROR(logger, "Failed to allocate memory");
 				return NULL;
 			}
 			

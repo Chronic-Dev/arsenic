@@ -19,3 +19,9 @@
 /missing
 /stamp-h?
 .DS_Store
+/config.guess
+/config.h.in~
+/config.sub
+/libtool
+/ltmain.sh
+

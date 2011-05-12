@@ -20,6 +20,7 @@
 #ifndef ARSENIC_IO_MEMORYFILE_
 #define ARSENIC_IO_MEMORYFILE_
 
+#include "../core/common.h"
 extern "C" {
 	#include <partial/partial.h>
 }
@@ -39,7 +40,7 @@ namespace Arsenic {
 			~MemoryFile();
 			
 			// Create a MemoryFile
-			static MemoryFile* open(const char* filename, int flags);
+			static MemoryFile* open(const char* filename, const char* flags);
 			static MemoryFile* openPartial(const char* container, const char* filename);
 			
 			// Read file
@@ -58,7 +59,7 @@ namespace Arsenic {
 			MemoryFile(const char* file, unsigned char* data);
 			
 			const char* mFile;
-			const char* mData;
+			unsigned char* mData;
 		};
 	}
 }
