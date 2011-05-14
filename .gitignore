@@ -1,5 +1,6 @@
 .deps/
 .dirstamp
+*.lo
 *.o
 /INSTALL
 /Makefile
@@ -24,4 +25,5 @@
 /config.sub
 /libtool
 /ltmain.sh
+/.libs
 
