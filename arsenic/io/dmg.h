@@ -21,7 +21,9 @@
 #define ARSENIC_IO_MEMORYFILE_
 
 #include "../core/common.h"
+
 extern "C" {
+	#include <xpwn-hfs-1.0/common.h>
 	#include <xpwn-hfs-1.0/abstractfile.h>
 	#include <xpwn-hfs-1.0/dmg.h>
 	#include <xpwn-hfs-1.0/filevault.h>
