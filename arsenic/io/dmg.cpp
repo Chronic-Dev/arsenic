@@ -31,6 +31,10 @@ namespace Arsenic {
 			mKey = key;
 			mOut = out;
 			mPartition = partition;
+			
+			short int word = 0x0001;
+			char* byte = (char *) &word;
+			mEndianness = byte[0] ? IS_LITTLE_ENDIAN : IS_BIG_ENDIAN;
 		}
 		
 		// Destructor

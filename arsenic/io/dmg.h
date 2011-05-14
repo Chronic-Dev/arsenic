@@ -55,6 +55,7 @@ namespace Arsenic {
 			
 			int mPartition;
 			const char* mKey;
+			char mEndianness;
 			AbstractFile* mIn;
 			AbstractFile* mOut;
 		};
