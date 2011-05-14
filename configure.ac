@@ -16,6 +16,7 @@ AC_CHECK_LIB([xml2], [xmlParseFile], [], [AC_MSG_ERROR(libxml2 not found)])
 AC_CHECK_LIB([z], [gzread], [], [AC_MSG_ERROR(zlib not found)])
 AC_CHECK_LIB([ssl], [SSL_library_init], [], [AC_MSG_ERROR(ssl not found)])
 AC_CHECK_LIB([log4cxx], [main], [], [AC_MSG_ERROR(log4cxx not found)])
+AC_CHECK_LIB([xpwn-hfs-1.0], [hfs_setsilence], [], [AC_MSG_ERROR(xpwn-hfs not found)])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

@@ -2,6 +2,7 @@
 .dirstamp
 *.lo
 *.o
+*.la
 /INSTALL
 /Makefile
 /Makefile.in

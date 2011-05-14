@@ -8,8 +8,6 @@ lib_LTLIBRARIES = libarsenic-core-2.0.la
 library_includedir=$(includedir)/arsenic-2.0
 library_include_HEADERS = arsenic/core/common.h arsenic/io/memoryfile.h
 
-#libxpwn_hfs_1_0_la_SOURCES = 
-
 libarsenic_core_2_0_la_SOURCES = arsenic/io/memoryfile.cpp
 
 #bin_PROGRAMS = arsenic
