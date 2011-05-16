@@ -20,10 +20,6 @@
 #ifndef ARSENIC_IO_DMG_
 #define ARSENIC_IO_DMG_
 
-#ifndef __cplusplus
-#define __cplusplus
-#endif /* __cplusplus */
-
 #include "../core/common.h"
 
 extern "C" {
