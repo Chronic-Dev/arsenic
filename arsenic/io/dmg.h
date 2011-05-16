@@ -18,7 +18,7 @@
 **/
 
 #ifndef ARSENIC_IO_DMG_
-#define ARSENIC_IO_MEMORYFILE_
+#define ARSENIC_IO_DMG_
 
 #ifndef __cplusplus
 #define __cplusplus
@@ -57,7 +57,7 @@ namespace Arsenic {
 			
 		private:
 			// Constructor
-			DMG(AbstractFile** in, AbstractFile** out, const char* key, int partition);
+			DMG(AbstractFile* in, AbstractFile* out, const char* key, int partition);
 			
 			int mPartition;
 			const char* mKey;

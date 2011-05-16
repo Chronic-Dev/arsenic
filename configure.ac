@@ -20,6 +20,3 @@ AC_CHECK_LIB([xpwn-hfs-1.0], [hfs_setsilence], [], [AC_MSG_ERROR(xpwn-hfs not fo
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
-
-# Checks for programs.
-AC_PROG_CXX

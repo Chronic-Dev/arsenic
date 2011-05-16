@@ -26,10 +26,10 @@ namespace Arsenic {
 	namespace IO {
 		
 		// Constructor
-		DMG::DMG(AbstractFile** in, AbstractFile** out, const char* key, int partition) {
-			mIn = *in;
+		DMG::DMG(AbstractFile* in, AbstractFile* out, const char* key, int partition) {
+			mIn = in;
 			mKey = key;
-			mOut = *out;
+			mOut = out;
 			mPartition = partition;
 			
 			short int word = 0x0001;
@@ -64,7 +64,8 @@ namespace Arsenic {
 		}
 		
 		DMG* DMG::open(const char* source, const char* dest, const char* key, int partition) {
-			AbstractFile* in, out;
+			AbstractFile* in;
+			AbstractFile* out;
 			bool hasKey = false;
 			
 			in = createAbstractFileFromFile(fopen(source, "rb"));
@@ -88,7 +89,7 @@ namespace Arsenic {
 				in = createAbstractFileFromFileVault(in, key);
 			}
 			
-			return (new DMG(*in, *out, key, partition));
+			return (new DMG(in, out, key, partition));
 		}
 		
 		// DMG operations
