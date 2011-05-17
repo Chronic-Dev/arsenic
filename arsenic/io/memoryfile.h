@@ -21,6 +21,7 @@
 #define ARSENIC_IO_MEMORYFILE_H_
 
 #include "../core/common.h"
+
 extern "C" {
 	#include <partial/partial.h>
 }

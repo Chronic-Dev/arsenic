@@ -27,6 +27,8 @@ extern "C" {
 	#include <plist/plist.h>
 }
 
+using namespace Arsenic::IO;
+
 namespace Arsenic {
 	namespace Util {
 		class PList {
@@ -38,13 +40,15 @@ namespace Arsenic {
 				~PList();
 
 				// PList operations
-				plist_t getNode(plist_t node);
+				plist_t getNode(uint32_t index);
 				plist_t getNode(const char* key);
 				plist_t getNode(plist_t node, uint32_t index);
 				plist_t getNode(plist_t node, const char* key);
 
+				void setNode(plist_t node, const char* key, plist_t item);
 				void setNode(const char* key, plist_t item);
-				void setNode(plist_t node, plist_t item);
+				void setNode(plist_t node, plist_t item, uint32_t index);
+				void setNode(const char* key, plist_t item, uint32_t index);
 
 				plist_type getType(plist_t node);
 				plist_type getType(const char* key);
@@ -81,6 +85,12 @@ namespace Arsenic {
 
 				void setData(plist_t node, unsigned char* data);
 				void setData(const char* key, unsigned char* data);
+
+				int32_t getDate(plist_t node);
+				int32_t getDate(const char* key);
+
+				void setDate(plist_t node, int32_t value);
+				void setDate(const char* key, int32_t value);
 
 				bool compare(plist_t nodeA, plist_t nodeB);
 
