@@ -362,5 +362,15 @@ namespace Arsenic {
 
 			return false;
 		}
+
+		bool PList::save() {
+			if (mFile == NULL) {
+				LOG4CXX_ERROR(logger, "Cannot save plist, MemoryFile was null");
+				return false;
+			}
+
+			mFile->write((unsigned char*)mNode);
+			return mFile->save();
+		}
 	}
 }

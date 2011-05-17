@@ -94,6 +94,8 @@ namespace Arsenic {
 
 				bool compare(plist_t nodeA, plist_t nodeB);
 
+				bool save();
+
 			private:
 				plist_t mNode;
 				plist_type mType;
