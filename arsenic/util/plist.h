@@ -82,7 +82,7 @@ namespace Arsenic {
 				void setData(plist_t node, unsigned char* data);
 				void setData(const char* key, unsigned char* data);
 
-				bool compare(plist_t nodeA, plist_t nodeB)
+				bool compare(plist_t nodeA, plist_t nodeB);
 
 			private:
 				plist_t mNode;
