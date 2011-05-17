@@ -114,8 +114,9 @@ namespace Arsenic {
 		// Read file
 		unsigned char* MemoryFile::read(int length) {
 			
-			// Yo Dawg, your reading a file in a file in a file
+			// Yo Dawg, i hurd you like files so i put i file in your file so you can file while you file
 			if (length > strlen((const char*)mData)) {
+				LOG4CXX_ERROR(logger, "Failed to read file, tried to read " << length << " bytes but we only have " << size() << " bytes");
 				return NULL;
 			}
 			
