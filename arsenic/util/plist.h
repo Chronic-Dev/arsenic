@@ -38,21 +38,51 @@ namespace Arsenic {
 				~PList();
 
 				// PList operations
+				plist_t getNode(plist_t node);
 				plist_t getNode(const char* key);
-				plist_t getNode(plist_t node, const char* key);
-				plist_t getNode(uint32_t index);
 				plist_t getNode(plist_t node, uint32_t index);
+				plist_t getNode(plist_t node, const char* key);
 
-				plist_type getType(const char* node);
+				void setNode(const char* key, plist_t item);
+				void setNode(plist_t node, plist_t item);
+
 				plist_type getType(plist_t node);
+				plist_type getType(const char* key);
 
-				const char* getString(const char* key);
+				void setType(plist_t node, plist_type type);
+				void setType(const char* key, plist_type type);
+
 				const char* getString(plist_t node);
+				const char* getString(const char* key);
 
-				bool getBool(const char* key);
+				void setString(plist_t node, const char* value);
+				void setString(const char* key, const char* value);
+
 				bool getBool(plist_t node);
+				bool getBool(const char* key);
 
-				//TODO SETTING ITEMS
+				void setBool(plist_t node, bool value);
+				void setBool(const char* key, bool value);
+
+				int getInt(plist_t node);
+				int getInt(const char* key);
+
+				void setInt(plist_t node, uint32_t value);
+				void setInt(const char* key, uint32_t value);
+
+				double getReal(plist_t node);
+				double getReal(const char* key);
+				
+				void setReal(plist_t node, double value);
+				void setReal(const char* key, double value);
+
+				unsigned char* getData(plist_t node);
+				unsigned char* getData(const char* key);
+
+				void setData(plist_t node, unsigned char* data);
+				void setData(const char* key, unsigned char* data);
+
+				bool compare(plist_t nodeA, plist_t nodeB)
 
 			private:
 				plist_t mNode;

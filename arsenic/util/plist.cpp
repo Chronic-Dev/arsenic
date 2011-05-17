@@ -26,8 +26,8 @@ namespace Arsenic {
 		PList::PList(MemoryFile* file) {
 			mFile = file;
 
-			if (! mFile) {
-				LOG4CXX_WARNING(logger, "MemoryFile was null (wtf?");
+			if (!mFile) {
+				LOG4CXX_WARNING(logger, "MemoryFile was null (wtf?)");
 				return;
 			}
 
@@ -55,7 +55,6 @@ namespace Arsenic {
 
 		// Destructor
 		PList::~PList() {
-
 			if (mNode) {
 				plist_free(mNode);
 			}
