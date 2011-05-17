@@ -17,8 +17,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#ifndef ARSENIC_COMMON_H
-#define ARSENIC_COMMON_H
+#ifndef ARSENIC_CORE_COMMON_H
+#define ARSENIC_CORE_COMMON_H
 
 #include <iostream>
 #include <ctype.h>
@@ -36,4 +36,4 @@ using namespace log4cxx;
 using namespace log4cxx::helpers;
 
 #define logger Logger::getLogger("libarsenic-core")
-#endif /* ARSENIC_COMMON_H */
+#endif /* ARSENIC_CORE_COMMON_H */

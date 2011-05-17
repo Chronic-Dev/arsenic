@@ -17,8 +17,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#ifndef ARSENIC_IO_MEMORYFILE_
-#define ARSENIC_IO_MEMORYFILE_
+#ifndef ARSENIC_IO_MEMORYFILE_H_
+#define ARSENIC_IO_MEMORYFILE_H_
 
 #include "../core/common.h"
 extern "C" {
@@ -35,32 +35,32 @@ namespace Arsenic {
 		#define ARSENIC_IO_MEMORYFILE_APPEND_CONT "a+"
 		
 		class MemoryFile {
-		public:
-			// Destructor
-			~MemoryFile();
-			
-			// Create a MemoryFile
-			static MemoryFile* open(const char* filename, const char* flags);
-			static MemoryFile* openPartial(const char* container, const char* filename);
-			
-			// Read file
-			unsigned char* read(int length);
-			unsigned char* readAll();
-			
-			// File operations
-			bool write(unsigned char* data);
-			void toFile(const char* file);
-			bool save();
-			bool save(const char* flags);
-			int size();
-			
-		private:
-			// Constructor
-			MemoryFile(const char* file, unsigned char* data);
-			
-			const char* mFile;
-			unsigned char* mData;
+			public:
+				// Destructor
+				~MemoryFile();
+				
+				// Create a MemoryFile
+				static MemoryFile* open(const char* filename, const char* flags);
+				static MemoryFile* openPartial(const char* container, const char* filename);
+				
+				// Read file
+				unsigned char* read(int length);
+				unsigned char* readAll();
+				
+				// File operations
+				bool write(unsigned char* data);
+				void toFile(const char* file);
+				bool save();
+				bool save(const char* flags);
+				int size();
+				
+			private:
+				// Constructor
+				MemoryFile(const char* file, unsigned char* data);
+				
+				const char* mFile;
+				unsigned char* mData;
 		};
 	}
 }
-#endif /* ARSENIC_IO_MEMORYFILE_ */
+#endif /* ARSENIC_IO_MEMORYFILE_H_ */

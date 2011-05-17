@@ -17,8 +17,8 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
-#ifndef ARSENIC_IO_DMG_
-#define ARSENIC_IO_DMG_
+#ifndef ARSENIC_IO_DMG_H_
+#define ARSENIC_IO_DMG_H_
 
 #include "../core/common.h"
 
@@ -33,34 +33,34 @@ namespace Arsenic {
 	namespace IO {
 		
 		class DMG {
-		public:
-			// Destructor
-			~DMG();
-			
-			// Create a DMG
-			static DMG* open(const char* source, const char* dest);
-			static DMG* open(const char* source, const char* dest, int partition);
-			static DMG* open(const char* source, const char* dest, const char* key);
-			static DMG* open(const char* source, const char* dest, const char* key, int partition);
-			
-			// DMG operations
-			void extract();
-			void build();
-			void build(int size);
-			void resources();
-			void toISO();
-			void toDMG();
-			
-		private:
-			// Constructor
-			DMG(AbstractFile* in, AbstractFile* out, const char* key, int partition);
-			
-			int mPartition;
-			const char* mKey;
-			char mEndianness;
-			AbstractFile* mIn;
-			AbstractFile* mOut;
+			public:
+				// Destructor
+				~DMG();
+				
+				// Create a DMG
+				static DMG* open(const char* source, const char* dest);
+				static DMG* open(const char* source, const char* dest, int partition);
+				static DMG* open(const char* source, const char* dest, const char* key);
+				static DMG* open(const char* source, const char* dest, const char* key, int partition);
+				
+				// DMG operations
+				void extract();
+				void build();
+				void build(int size);
+				void resources();
+				void toISO();
+				void toDMG();
+				
+			private:
+				// Constructor
+				DMG(AbstractFile* in, AbstractFile* out, const char* key, int partition);
+				
+				int mPartition;
+				const char* mKey;
+				char mEndianness;
+				AbstractFile* mIn;
+				AbstractFile* mOut;
 		};
 	}
 }
-#endif /* ARSENIC_IO_DMG_ */
+#endif /* ARSENIC_IO_DMG_H_ */
