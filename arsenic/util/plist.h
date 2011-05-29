@@ -91,6 +91,14 @@ namespace Arsenic {
 
 				void setDate(plist_t node, int32_t value);
 				void setDate(const char* key, int32_t value);
+				
+				plist_t createArray(const char* name);
+				plist_t createDict(const char* name);
+				plist_t createString(const char* name);
+				plist_t createBool(const char* name);
+				plist_t createInt(const char* name);
+				plist_t createReal(const char* name);
+				plist_t createDate(const char* name);
 
 				bool compare(plist_t nodeA, plist_t nodeB);
 
