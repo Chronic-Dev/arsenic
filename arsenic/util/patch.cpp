@@ -23,7 +23,7 @@
 namespace Arsenic {
 	namespace Util {
 		
-		unsigned char* Patch::find(MemoryFile* file, int length, unsigned char* data, int size) {
+		unsigned char* Patch::find(MemoryFile* file, unsigned char* data, int size) {
 			if (!file) {
 				LOG4CXX_ERROR(logger, "MemoryFile was null (wtf?)");
 				return NULL;
@@ -31,7 +31,7 @@ namespace Arsenic {
 			
 			unsigned char* dat = file->readAll();
 			
-			for (int i = 0; i < length; i++) {
+			for (int i = 0; i < file->size(); i++) {
 				if (!memcmp(&dat[i], data, size)) {
 					LOG4CXX_INFO(logger, "Found patch address" << &dat[i]);
 					return &dat[i];
@@ -40,5 +40,7 @@ namespace Arsenic {
 			
 			return NULL;
 		}
+
+		bool Patch::apply(MemoryFile* file, )
 	}
 }

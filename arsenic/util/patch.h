@@ -27,7 +27,7 @@ namespace Arsenic {
 	namespace Util {
 		class Patch {
 			public:
-				static unsigned char* find(MemoryFile* file, int length, unsigned char* data, int size);
+				static unsigned char* find(MemoryFile* file, unsigned char* data, int size);
 			private:	
 		};
 	}
