@@ -23,7 +23,7 @@
 namespace Arsenic {
 	namespace Util {
 		
-		int Patch::find(MemoryFile* file, unsigned char* data, int size) {
+		uint32_t Patch::find(MemoryFile* file, unsigned char* data, int size) {
 			if (!file) {
 				LOG4CXX_ERROR(logger, "MemoryFile was null (wtf?)");
 				return 0;

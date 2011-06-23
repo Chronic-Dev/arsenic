@@ -30,7 +30,7 @@ namespace Arsenic {
 	namespace Util {
 		class Patch {
 			public:
-				static int find(MemoryFile* file, unsigned char* data, int size);
+				static uint32_t find(MemoryFile* file, unsigned char* data, int size);
 				static bool apply(MemoryFile* file, uint32_t offset, unsigned char* data);
 			//private:	
 		};
