@@ -22,13 +22,17 @@
 #define ARSENIC_UTIL_PATCH_H_
 
 #include "../core/common.h"
+#include "../io/memoryfile.h"
+
+using namespace Arsenic::IO;
 
 namespace Arsenic {
 	namespace Util {
 		class Patch {
 			public:
-				static unsigned char* find(MemoryFile* file, unsigned char* data, int size);
-			private:	
+				static int find(MemoryFile* file, unsigned char* data, int size);
+				static bool apply(MemoryFile* file, uint32_t offset, unsigned char* data);
+			//private:	
 		};
 	}
 }
