@@ -74,5 +74,9 @@ namespace Arsenic {
 		Node* PList::getNode() {
 			return mNode;
 		}
+		
+		plist_type PList::getType() {
+			return mType;
+		}
 	}
 }

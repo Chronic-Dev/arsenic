@@ -41,7 +41,8 @@ namespace Arsenic {
 				~PList();
 
 				// PList operations
-				plist_t getNode(uint32_t index);
+				plist_t getNode();
+				plist_Type getType();
 
 			private:
 				Node* mNode;
